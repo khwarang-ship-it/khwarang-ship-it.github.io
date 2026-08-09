@@ -3,7 +3,16 @@
 다른 프로젝트(레포)에서 `ms.hs.kr/무언가/` 형태의 공개 페이지가 필요할 때 참고하는 문서다.
 개인정보 처리방침, 학운위 제출용 공개 문서, 프로젝트 소개 페이지 등이 여기 해당한다.
 
-## 왜 이게 되는가
+## 먼저 확인할 것 — 정적인가, 서버가 필요한가
+
+- **정적 페이지/앱** (순수 HTML·CSS·JS로 빌드 결과가 끝나는 것, 또는 `next export` 같은
+  정적 내보내기가 가능한 것) → 아래 **방법 A/B**(GitHub Pages 기반). 지금 이 방식으로
+  DNS가 `ms.hs.kr`을 서빙하고 있는 동안에만 유효.
+- **서버가 필요한 앱** (로그인/세션, API 라우트, SSR, DB 연결, 쿠키 기반 게이트 등) →
+  GitHub Pages로는 애초에 안 된다(정적 파일만 서빙, 프록시 기능 없음). **방법 C**(Vercel
+  rewrite)로 간다. `mshs-curriculm`(currifair)이 이 경우였다.
+
+## 왜 방법 A/B가 되는가 (GitHub Pages 기반, 정적 전용)
 
 이 레포(`khwarang-ship-it/khwarang-ship-it.github.io`)는 이름이 정확히
 `계정이름.github.io`라서 GitHub Pages가 이 레포를 **유저 사이트**로 취급하고, 여기 걸린
@@ -11,6 +20,12 @@
 전파**된다. 다른 레포가 자기만의 커스텀 도메인을 따로 설정하지 않으면, GitHub Pages를
 켜는 순간 `ms.hs.kr/그레포이름/`으로 자동으로 뜬다. (자세한 배경은 이 레포의
 [`CLAUDE.md`](CLAUDE.md) 참고.)
+
+**⚠️ `ms.hs.kr`이 Vercel로 이전(컷오버)되면 이 전파 메커니즘 자체가 끊긴다** — DNS가
+더 이상 GitHub Pages를 보지 않기 때문. 이전 완료 후 방법 A는 여전히 유효하다(이 레포
+자체가 Vercel에서도 정적 파일을 그대로 서빙하므로, 폴더만 추가하면 됨). **방법 B(형제
+레포 자동 전파)는 컷오버 후 동작하지 않는다** — 새 프로젝트는 방법 A 또는 방법 C로 간다.
+현재 이전 진행 상황은 `CLAUDE.md`의 "호스팅: GitHub Pages → Vercel 이전 진행 중" 참고.
 
 ## 방법 A — 이 레포 안에 폴더로 추가 (가벼운 정적 페이지 1~2장일 때 권장)
 
@@ -47,17 +62,58 @@ gh api repos/khwarang-ship-it/khwarang-ship-it.github.io/pages/builds/latest --j
 
 배포되면 `https://ms.hs.kr/프로젝트이름/`.
 
+## 방법 C — Vercel rewrite로 붙이기 (서버가 필요한 앱)
+
+로그인/세션, API 라우트, DB 연결 등 서버 실행이 필요한 앱(Next.js 등)은 GitHub Pages에
+못 올라간다. 이 레포와 그 앱을 각각 Vercel 프로젝트로 배포하고, 이 레포의 `vercel.json`이
+경로를 갈라서 넘겨준다.
+
+1. 앱 레포를 Vercel에 새 프로젝트로 배포한다(private 레포도 무료로 가능). 배포되면 나온
+   `https://<프로젝트>.vercel.app` 주소를 적어둔다.
+2. Next.js라면 `next.config.mjs`에 `basePath: '/프로젝트이름'`을 추가한다. 이러면
+   `next/link`·정적 자산 경로는 자동으로 접두어가 붙지만, **자동으로 안 붙는 지점들을
+   직접 찾아 고쳐야 한다**:
+   - `next/image`의 리터럴 `src="/foo.png"` (import한 이미지가 아닌 경우)
+   - 클라이언트 `fetch("/api/...")` 같은 자체 API 호출
+   - 미들웨어/`proxy.ts`에서 `NextResponse.redirect(new URL("/어딘가", request.url))`처럼
+     직접 만드는 리다이렉트 — `request.nextUrl.pathname`은 basePath가 이미 제거된
+     값이라는 점도 같이 감안해야 한다
+   - Server Action을 쓰면 `experimental.serverActions.allowedOrigins`에 `ms.hs.kr`을
+     추가해야 한다(배포 도메인과 실접속 도메인이 달라서 origin 검증에 걸림)
+
+   실제 사례: `mshs-curriculm` 레포의 커밋 `Add basePath for serving under
+   ms.hs.kr/currifair/ via Vercel rewrite`에 이 항목들을 전부 고친 예시가 있다.
+3. 이 레포(`khwarang-ship-it.github.io`)를 Vercel에 별도 프로젝트로 배포한다
+   (프레임워크 없음/정적으로 인식되면 그대로 둔다).
+4. 이 레포의 `vercel.json`에 rewrite 규칙을 추가한다 — 와일드카드 규칙만으로는 세그먼트
+   0개(경로 자체)를 못 잡으므로 반드시 둘 다 넣는다:
+   ```json
+   {
+     "rewrites": [
+       { "source": "/프로젝트이름", "destination": "https://<프로젝트>.vercel.app/프로젝트이름" },
+       { "source": "/프로젝트이름/:path*", "destination": "https://<프로젝트>.vercel.app/프로젝트이름/:path*" }
+     ]
+   }
+   ```
+5. 루트 포털 Vercel 프로젝트의 Settings → Domains에 `ms.hs.kr`을 연결하고(아직 안
+   돼 있다면 — 컷오버 자체는 사용자가 가비아 DNS를 직접 바꿔야 완료된다), 가비아 DNS를
+   Vercel이 알려주는 값으로 바꾼다. **이 문서에 박힌 값을 쓰지 말고 그때그때 Vercel
+   대시보드가 보여주는 실제 값을 쓴다** — 시기/프로젝트마다 달라질 수 있다고 Vercel
+   문서에 명시돼 있다.
+
 ## 반드시 지킬 것
 
 - **실제 코드 저장소(특히 private/민감 정보 있는 레포)를 그대로 Public Pages로 켜지
   않는다.** 공개용 정적 페이지만 담은 폴더(방법 A)나 별도 레포(방법 B)를 쓴다.
 - **서브패스 레포에는 `CNAME` 파일을 절대 넣지 않는다.** 자동 전파가 이 조건에
   의존한다.
-- **`ms.hs.kr` 루트 홈페이지(`index.html`)는 여기서 만든 서브패스를 링크하지
-  않는다.** 이건 실수가 아니라 의도된 정책이다 — 루트 페이지는 프로젝트 디렉터리가
-  아니라 학교 신원 확인용 미니멀 페이지로 유지하기로 했다(`CLAUDE.md`의 "루트 페이지
-  정책" 참고). 이 서브패스 URL이 필요한 곳(에듀집 제출 양식, 학운위 서류 등)에는
-  주소를 직접 적어 넣는다 — 홈페이지에 카드나 메뉴를 추가하지 않는다.
+- **기본값은 `ms.hs.kr` 루트 홈페이지(`index.html`)에 새 서브패스를 링크하지 않는
+  것이다.** 루트 페이지는 프로젝트를 자동으로 나열하는 디렉터리가 아니라 학교 신원
+  확인용 미니멀 페이지로 유지하기로 했다(`CLAUDE.md`의 "루트 페이지 정책" 참고).
+  개인정보 처리방침류는 이 규칙에 예외가 없다 — 항상 비노출.
+  프로젝트 소개는 **사용자가 명시적으로 노출을 요청했을 때만** 예외적으로 추가한다
+  (현재 예: 선택과목 박람회/currifair). 요청이 없으면 서브패스 URL은 필요한 곳(에듀집
+  제출 양식, 학운위 서류 등)에 직접 적어 넣고 홈페이지는 건드리지 않는다.
 - 경로가 곧 폴더/레포 이름이므로 이름은 신중하게 정한다(공백·특수문자 금지, 나중에
   바꾸면 예전 URL이 깨짐).
 

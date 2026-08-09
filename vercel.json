@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/currifair", "destination": "https://<currifair-프로젝트>.vercel.app/currifair" },
+    { "source": "/currifair/:path*", "destination": "https://<currifair-프로젝트>.vercel.app/currifair/:path*" }
+  ]
+}
