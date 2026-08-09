@@ -3,18 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ms.hs.kr — 명석고등학교 교내 도구 모음</title>
-<meta name="description" content="명석고등학교에서 쓰이는 교내 도구들을 모아둔 곳입니다. 생활기록부 점검 프로그램 「명석한 생기부」를 운영하고 있습니다.">
+<title>명석고등학교 — ms.hs.kr</title>
+<meta name="description" content="ms.hs.kr, 명석고등학교 교사가 운영하는 공간입니다. 학교의 공식 안내는 명석고등학교 공식 홈페이지를 이용해 주세요.">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://ms.hs.kr/">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ms.hs.kr/">
-<meta property="og:title" content="ms.hs.kr — 명석고등학교 교내 도구 모음">
-<meta property="og:description" content="명석고등학교에서 쓰이는 교내 도구들을 모아둔 곳입니다.">
+<meta property="og:title" content="명석고등학교 — ms.hs.kr">
+<meta property="og:description" content="명석고등학교 교사가 운영하는 공간입니다.">
+<meta property="og:image" content="https://ms.hs.kr/assets/logo.png">
 <meta property="og:locale" content="ko_KR">
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232f6b4f'/%3E%3Ctext x='16' y='22' font-size='17' font-family='serif' font-weight='700' fill='%23fff' text-anchor='middle'%3E明%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="/assets/logo.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/logo.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,73 +25,76 @@
 
 <style>
 /* ─────────────────────────────────────────────
-   Tokens — 원고지(paper) / 먹(ink)
+   Tokens — 명석고 교표 팔레트(남색·하늘·연두·주황)에서 도출
    ───────────────────────────────────────────── */
 :root {
-  --paper:      #f4f6f2;
+  --paper:      #f4f6f9;
   --paper-2:    #ffffff;
-  --fg:         #16232e;
-  --fg-muted:   #54646c;
-  --accent:     #2f6b4f;
-  --accent-ink: #23543d;
-  --accent-soft:#e4efe8;
-  --navy:       #16324f;
-  --seal:       #b8442e;
-  --line:       #dde3dc;
-  --grid-line:  rgba(22, 50, 79, .085);
-  --glow:       rgba(47, 107, 79, .17);
-  --card:       rgba(255, 255, 255, .72);
-  --card-brd:   rgba(22, 50, 79, .11);
-  --card-shadow: 0 1px 2px rgba(16,35,46,.05), 0 12px 32px -16px rgba(16,35,46,.22);
+  --fg:         #12172a;
+  --fg-muted:   #58637a;
+  --accent:     #171c61;   /* 교표 남색 */
+  --accent-ink: #0d1040;
+  --accent-soft:#e8e9f5;
+  --pop:        #d14e13;   /* 교표 주황 — 단 하나의 포인트 */
+  --line:       #dfe2ea;
+  --grid-line:  rgba(23, 28, 97, .07);
+  --glow-a:     rgba(40, 167, 225, .20);   /* 교표 하늘 */
+  --glow-b:     rgba(142, 195, 31, .13);   /* 교표 연두 */
+  --card:       rgba(255, 255, 255, .72)  ;
+  --card-brd:   rgba(23, 28, 97, .12);
+  --card-shadow: 0 1px 2px rgba(10,14,40,.05), 0 12px 32px -16px rgba(10,14,40,.22);
   --ring:       var(--accent);
+  --btn-fg:     #ffffff;
 
   --f-display: "Gowun Batang", "Apple SD Gothic Neo", serif;
   --f-body: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 
-  --measure: 1140px;
+  --measure: 1080px;
   --r: 18px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --paper:      #0a1319;
-    --paper-2:    #0e1a22;
-    --fg:         #e7eef0;
-    --fg-muted:   #93a6ad;
-    --accent:     #5cb98a;
-    --accent-ink: #8bd3ab;
-    --accent-soft:rgba(92,185,138,.13);
-    --navy:       #7aa5cc;
-    --seal:       #e0715a;
-    --line:       rgba(255,255,255,.10);
-    --grid-line:  rgba(160, 200, 220, .07);
-    --glow:       rgba(92, 185, 138, .16);
+    --paper:      #0a0e1c;
+    --paper-2:    #0e1326;
+    --fg:         #eef1f7;
+    --fg-muted:   #9aa5bd;
+    --accent:     #5cc2f0;
+    --accent-ink: #8bd7f7;
+    --accent-soft:rgba(92,194,240,.14);
+    --pop:        #ff8a57;
+    --line:       rgba(255,255,255,.10)   ;
+    --grid-line:  rgba(150, 180, 230, .06);
+    --glow-a:     rgba(92, 194, 240, .17);
+    --glow-b:     rgba(142, 195, 31, .10);
     --card:       rgba(255,255,255,.045);
-    --card-brd:   rgba(255,255,255,.10);
+    --card-brd:   rgba(255,255,255,.11);
     --card-shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.7);
+    --btn-fg:     #071019;
   }
 }
 :root[data-theme="dark"] {
-  --paper:#0a1319; --paper-2:#0e1a22; --fg:#e7eef0; --fg-muted:#93a6ad;
-  --accent:#5cb98a; --accent-ink:#8bd3ab; --accent-soft:rgba(92,185,138,.13);
-  --navy:#7aa5cc; --seal:#e0715a; --line:rgba(255,255,255,.10);
-  --grid-line:rgba(160,200,220,.07); --glow:rgba(92,185,138,.16);
-  --card:rgba(255,255,255,.045); --card-brd:rgba(255,255,255,.10);
+  --paper:#0a0e1c; --paper-2:#0e1326; --fg:#eef1f7; --fg-muted:#9aa5bd;
+  --accent:#5cc2f0; --accent-ink:#8bd7f7; --accent-soft:rgba(92,194,240,.14);
+  --pop:#ff8a57; --line:rgba(255,255,255,.10);
+  --grid-line:rgba(150,180,230,.06); --glow-a:rgba(92,194,240,.17); --glow-b:rgba(142,195,31,.10);
+  --card:rgba(255,255,255,.045); --card-brd:rgba(255,255,255,.11);
   --card-shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.7);
+  --btn-fg:#071019;
 }
 :root[data-theme="light"] {
-  --paper:#f4f6f2; --paper-2:#ffffff; --fg:#16232e; --fg-muted:#54646c;
-  --accent:#2f6b4f; --accent-ink:#23543d; --accent-soft:#e4efe8;
-  --navy:#16324f; --seal:#b8442e; --line:#dde3dc;
-  --grid-line:rgba(22,50,79,.085); --glow:rgba(47,107,79,.17);
-  --card:rgba(255,255,255,.72); --card-brd:rgba(22,50,79,.11);
-  --card-shadow:0 1px 2px rgba(16,35,46,.05), 0 12px 32px -16px rgba(16,35,46,.22);
+  --paper:#f4f6f9; --paper-2:#ffffff; --fg:#12172a; --fg-muted:#58637a;
+  --accent:#171c61; --accent-ink:#0d1040; --accent-soft:#e8e9f5;
+  --pop:#d14e13; --line:#dfe2ea;
+  --grid-line:rgba(23,28,97,.07); --glow-a:rgba(40,167,225,.20); --glow-b:rgba(142,195,31,.13);
+  --card:rgba(255,255,255,.72); --card-brd:rgba(23,28,97,.12);
+  --card-shadow:0 1px 2px rgba(10,14,40,.05), 0 12px 32px -16px rgba(10,14,40,.22);
+  --btn-fg:#ffffff;
 }
 
 /* ───────────── base ───────────── */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
@@ -160,18 +165,10 @@ a { color: inherit; }
   margin-right: auto;
   min-width: 0;
 }
-.seal {
+.brand img {
   flex: none;
-  width: 32px; height: 32px;
-  border-radius: 8px;
-  display: grid; place-items: center;
-  background: var(--seal);
-  color: #fff;
-  font-family: var(--f-display);
-  font-weight: 700;
-  font-size: 1rem;
-  line-height: 1;
-  box-shadow: 0 2px 8px -2px color-mix(in srgb, var(--seal) 55%, transparent);
+  width: 34px; height: 34px;
+  object-fit: contain;
 }
 .brand-txt { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
 .brand-txt b {
@@ -220,78 +217,88 @@ a { color: inherit; }
 /* ───────────── hero ───────────── */
 .hero {
   position: relative;
-  padding: clamp(64px, 11vw, 132px) 0 clamp(56px, 8vw, 104px);
+  min-height: calc(100svh - 66px);
+  display: flex;
+  align-items: center;
+  padding: clamp(48px, 8vw, 88px) 0;
   isolation: isolate;
   overflow: hidden;
 }
-/* 원고지 격자 — manuscript-paper ruling, radially faded */
+/* 은은한 점 격자 */
 .hero::before {
   content: "";
   position: absolute;
-  inset: -10% -10% 0;
+  inset: -10%;
   z-index: -2;
-  background-image:
-    repeating-linear-gradient(to right,  var(--grid-line) 0 1px, transparent 1px 38px),
-    repeating-linear-gradient(to bottom, var(--grid-line) 0 1px, transparent 1px 38px);
-  -webkit-mask-image: radial-gradient(115% 82% at 22% 30%, #000 12%, transparent 72%);
-          mask-image: radial-gradient(115% 82% at 22% 30%, #000 12%, transparent 72%);
+  background-image: radial-gradient(var(--grid-line) 1.4px, transparent 1.4px);
+  background-size: 30px 30px;
+  -webkit-mask-image: radial-gradient(120% 85% at 50% 40%, #000 8%, transparent 68%);
+          mask-image: radial-gradient(120% 85% at 50% 40%, #000 8%, transparent 68%);
 }
-/* single soft glow */
+/* 교표 색을 딴 은은한 글로우 두 겹 */
 .hero::after {
   content: "";
   position: absolute;
   z-index: -1;
-  width: min(760px, 92vw);
+  width: min(820px, 100vw);
   aspect-ratio: 1;
-  right: -14%;
-  top: -34%;
+  right: -22%;
+  top: -30%;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--glow) 0%, transparent 66%);
-  animation: drift 22s ease-in-out infinite alternate;
+  background:
+    radial-gradient(circle at 35% 65%, var(--glow-b) 0%, transparent 55%),
+    radial-gradient(circle at 60% 35%, var(--glow-a) 0%, transparent 58%);
+  animation: drift 24s ease-in-out infinite alternate;
   pointer-events: none;
 }
 @keyframes drift {
   from { transform: translate3d(0,0,0) scale(1); }
-  to   { transform: translate3d(-5%, 7%, 0) scale(1.13); }
+  to   { transform: translate3d(-6%, 6%, 0) scale(1.12); }
+}
+@keyframes float {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-14px); }
 }
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr);
-  gap: clamp(32px, 5vw, 68px);
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+  gap: clamp(28px, 6vw, 56px);
   align-items: center;
+}
+
+.mark-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mark-wrap img {
+  width: min(320px, 68vw);
+  height: auto;
+  filter: drop-shadow(0 20px 50px rgba(10,14,40,.18));
+  animation: float 5.5s ease-in-out infinite alternate;
 }
 
 h1 {
   font-family: var(--f-display);
   font-weight: 700;
-  font-size: clamp(2.3rem, 6.2vw, 4rem);
-  line-height: 1.24;
+  font-size: clamp(2.2rem, 5.6vw, 3.6rem);
+  line-height: 1.28;
   letter-spacing: -.02em;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   text-wrap: balance;
 }
 h1 em {
   font-style: normal;
-  color: var(--accent);
+  color: var(--pop);
   position: relative;
-  white-space: nowrap;
-}
-h1 em::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: .06em;
-  height: .30em;
-  background: var(--accent-soft);
-  z-index: -1;
-  border-radius: 2px;
 }
 
 .lede {
   font-size: clamp(1rem, 1.6vw, 1.09rem);
   color: var(--fg-muted);
   max-width: 46ch;
-  margin: 0 0 34px;
+  margin: 0 0 32px;
   text-wrap: pretty;
 }
 
@@ -309,253 +316,22 @@ h1 em::after {
   transition: transform .18s ease, background-color .18s ease, border-color .18s ease, color .18s ease;
 }
 .btn svg { width: 16px; height: 16px; flex: none; }
-.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary { background: var(--accent); color: var(--btn-fg); }
 .btn-primary:hover { background: var(--accent-ink); transform: translateY(-2px); }
-:root[data-theme="dark"] .btn-primary,
-:root:not([data-theme="light"]) .btn-primary { color: #06110c; }
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .btn-primary { color: #fff; }
-}
 .btn-ghost { border-color: var(--card-brd); color: var(--fg); background: var(--card); }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
-/* hero side panel — 원고지 byte counter, the thing the tool actually does */
-.spec {
-  border: 1px solid var(--card-brd);
-  border-radius: var(--r);
-  background: var(--card);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: var(--card-shadow);
-  padding: 22px;
-  min-width: 0;
-}
-.spec-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 12px;
-  font-size: .74rem;
-  letter-spacing: .1em;
-  color: var(--fg-muted);
-  padding-bottom: 12px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid var(--line);
-}
-.spec-head b {
-  font-weight: 600;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0;
-}
-.spec-sample {
-  font-size: .875rem;
-  line-height: 2;
-  color: var(--fg);
-  margin: 0 0 16px;
-  word-break: keep-all;
-}
-.spec-sample mark {
-  background: color-mix(in srgb, var(--seal) 20%, transparent);
-  color: inherit;
-  border-bottom: 1.5px solid var(--seal);
-  padding: 1px 2px;
-  border-radius: 2px;
-}
-.spec-note {
-  display: flex;
-  gap: 9px;
-  font-size: .8rem;
-  color: var(--fg-muted);
-  line-height: 1.6;
-  margin: 0;
-}
-.spec-note svg { width: 15px; height: 15px; flex: none; color: var(--seal); margin-top: 4px; }
-.meter {
-  height: 5px;
-  border-radius: 99px;
-  background: var(--line);
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-.meter i {
-  display: block;
-  height: 100%;
-  width: 0;
-  border-radius: 99px;
-  background: linear-gradient(90deg, var(--accent), var(--navy));
-  transition: width 1.5s cubic-bezier(.16,1,.3,1) .3s;
-}
-.spec.in .meter i { width: 78%; }
-
-/* ───────────── bento ───────────── */
-.tools { padding: clamp(48px, 7vw, 88px) 0 clamp(64px, 9vw, 108px); scroll-margin-top: 78px; }
-.sec-head { margin-bottom: 34px; }
-.sec-head h2 {
-  font-family: var(--f-display);
-  font-size: clamp(1.5rem, 3.4vw, 2rem);
-  font-weight: 700;
-  letter-spacing: -.015em;
-  margin: 0 0 8px;
-}
-.sec-head p { color: var(--fg-muted); margin: 0; font-size: .95rem; max-width: 54ch; }
-
-.bento {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
-}
-
-.card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 26px;
-  border: 1px solid var(--card-brd);
-  border-radius: var(--r);
-  background: var(--card);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: var(--card-shadow);
-  text-decoration: none;
-  color: inherit;
-  min-width: 0;
-  overflow: hidden;
-  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-  transition: transform .35s cubic-bezier(.16,1,.3,1), border-color .25s ease;
-}
-/* pointer-tracked spotlight */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%),
-              color-mix(in srgb, var(--accent) 15%, transparent), transparent 62%);
-  opacity: 0;
-  transition: opacity .3s ease;
-  pointer-events: none;
-}
-.card:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
-.card:hover::before { opacity: 1; }
-
-.card-lg { grid-column: span 2; grid-row: span 2; }
-
-.card-ico {
-  width: 40px; height: 40px;
-  border-radius: 11px;
-  display: grid; place-items: center;
-  background: var(--accent-soft);
-  color: var(--accent);
-  margin-bottom: 16px;
-  flex: none;
-}
-.card-ico svg { width: 20px; height: 20px; }
-
-.card h3 {
-  font-size: 1.12rem;
-  font-weight: 700;
-  letter-spacing: -.01em;
-  margin: 0 0 8px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  flex-wrap: wrap;
-}
-.card-lg h3 { font-size: 1.4rem; font-family: var(--f-display); }
-.card p {
-  margin: 0;
-  font-size: .9rem;
-  color: var(--fg-muted);
-  line-height: 1.75;
-  word-break: keep-all;
-}
-
-.tag {
-  font-size: .68rem;
-  font-weight: 600;
-  letter-spacing: .04em;
-  padding: 3px 9px;
-  border-radius: 99px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  white-space: nowrap;
-}
-.tag-quiet { background: transparent; border: 1px solid var(--line); color: var(--fg-muted); }
-
-.facts {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0 0;
-  display: grid;
-  gap: 9px;
-  border-top: 1px solid var(--line);
-  padding-top: 18px;
-}
-.facts li {
-  display: grid;
-  grid-template-columns: 5.5rem 1fr;
-  gap: 12px;
-  font-size: .845rem;
-  align-items: baseline;
-}
-.facts dfn, .facts b {
-  font-style: normal;
-  font-weight: 500;
-  color: var(--fg-muted);
-  font-size: .8rem;
-  letter-spacing: .02em;
-}
-.facts span { color: var(--fg); word-break: keep-all; }
-
-.card-foot {
-  margin-top: auto;
-  padding-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: .82rem;
-  font-weight: 600;
-  color: var(--accent);
-  text-decoration: none;
-  padding: 7px 13px;
-  border: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
-  border-radius: 9px;
-  transition: background-color .18s ease, transform .18s ease;
-}
-.chip svg { width: 14px; height: 14px; flex: none; }
-.chip:hover { background: var(--accent-soft); transform: translateY(-1px); }
-
-.card-link {
-  margin-top: auto;
-  padding-top: 18px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-size: .85rem;
-  font-weight: 600;
-  color: var(--accent);
-}
-.card-link svg { width: 15px; height: 15px; transition: transform .22s ease; }
-.card:hover .card-link svg { transform: translate(2px, -2px); }
-.card-link.go:hover svg, .card:hover .card-link.go svg { transform: translateX(3px); }
 
 /* ───────────── footer ───────────── */
 .site-foot {
   border-top: 1px solid var(--line);
-  padding: 40px 0 56px;
+  padding: 32px 0 48px;
   font-size: .85rem;
   color: var(--fg-muted);
 }
 .foot-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px 40px;
+  gap: 16px 40px;
   justify-content: space-between;
   align-items: flex-start;
 }
@@ -567,15 +343,15 @@ h1 em::after {
   display: flex;
   gap: 10px;
   align-items: flex-start;
-  margin: 26px 0 0;
+  margin: 24px 0 0;
   padding: 13px 16px;
   border-radius: 11px;
   border: 1px solid var(--line);
-  background: color-mix(in srgb, var(--seal) 7%, transparent);
+  background: color-mix(in srgb, var(--pop) 7%, transparent);
   line-height: 1.65;
   word-break: keep-all;
 }
-.disclaim svg { width: 16px; height: 16px; flex: none; color: var(--seal); margin-top: 3px; }
+.disclaim svg { width: 16px; height: 16px; flex: none; color: var(--pop); margin-top: 3px; }
 .disclaim b { color: var(--fg); font-weight: 600; }
 
 /* ───────────── reveal ───────────── */
@@ -585,21 +361,20 @@ h1 em::after {
   transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
 }
 .reveal.in { opacity: 1; transform: none; }
-.reveal.d1 { transition-delay: .08s; }
-.reveal.d2 { transition-delay: .16s; }
+.reveal.d1 { transition-delay: .1s; }
+.reveal.d2 { transition-delay: .2s; }
 
 /* ───────────── responsive ───────────── */
-@media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .card-lg { grid-column: span 2; grid-row: auto; }
+@media (max-width: 860px) {
+  .hero { min-height: auto; }
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .cta-row { justify-content: center; }
+  .mark-wrap img { width: min(220px, 52vw); }
 }
-@media (max-width: 620px) {
+@media (max-width: 560px) {
   .nav a[data-optional] { display: none; }
-  .bento { grid-template-columns: 1fr; }
-  .card-lg { grid-column: auto; }
-  .facts li { grid-template-columns: 1fr; gap: 2px; }
   .brand-txt span { display: none; }
+  .foot-grid { flex-direction: column; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -609,23 +384,17 @@ h1 em::after {
     transition-duration: .001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .card { transform: none !important; }
-  .spec .meter i { width: 78%; }
 }
 </style>
-<noscript><style>.reveal { opacity: 1; transform: none; } .spec .meter i { width: 78%; }</style></noscript>
+<noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <g id="i-ext"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></g>
-    <g id="i-arrow"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></g>
-    <g id="i-down"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></g>
-    <g id="i-file"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></g>
     <g id="i-cap"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></g>
     <g id="i-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g>
-    <g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></g>
     <g id="i-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></g>
     <g id="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></g>
     <g id="i-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9"/></g>
@@ -635,15 +404,14 @@ h1 em::after {
 <header class="site-head" id="head">
   <div class="wrap">
     <a class="brand" href="/">
-      <span class="seal" aria-hidden="true">明</span>
+      <img src="/assets/logo-mark.png" alt="" width="34" height="34">
       <span class="brand-txt">
-        <b>명석고 교내 도구</b>
+        <b>명석고등학교</b>
         <span>ms.hs.kr</span>
       </span>
     </a>
     <nav class="nav" aria-label="주요">
-      <a href="#tools">도구</a>
-      <a href="https://mshs.djsch.kr/" data-optional>학교 홈페이지</a>
+      <a href="https://mshs.djsch.kr/">학교 홈페이지</a>
       <a href="mailto:khwarang2000@ms.hs.kr" data-optional>문의</a>
     </nav>
     <button class="theme-btn" id="theme" type="button" aria-label="밝은/어두운 화면 전환">
@@ -657,91 +425,27 @@ h1 em::after {
   <section class="hero">
     <div class="wrap hero-grid">
       <div>
-        <p class="eyebrow reveal">명석고등학교 · 교내 도구 모음</p>
-        <h1 class="reveal d1">선생님의 일을<br><em>조금 더 가볍게.</em></h1>
+        <p class="eyebrow reveal">ms.hs.kr</p>
+        <h1 class="reveal d1">명석고등학교의<br><em>작은 공간입니다.</em></h1>
         <p class="lede reveal d2">
-          학교에서 실제로 손이 많이 가던 일들을 프로그램으로 만들어 이곳에 모아둡니다.
-          지금은 생활기록부 기재 점검 도구 「명석한 생기부」를 교내에 배포해 운영하고 있습니다.
+          이 도메인은 명석고등학교 교사 개인이 운영합니다.
+          학교의 공식 소식과 안내는 아래 학교 홈페이지를 이용해 주세요.
         </p>
         <div class="cta-row reveal d2">
-          <a class="btn btn-primary" href="#tools">
-            도구 살펴보기
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-down"/></svg>
-          </a>
-          <a class="btn btn-ghost" href="https://mshs.djsch.kr/">
+          <a class="btn btn-primary" href="https://mshs.djsch.kr/">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cap"/></svg>
             학교 공식 홈페이지
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ext"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="mailto:khwarang2000@ms.hs.kr">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-mail"/></svg>
+            문의하기
           </a>
         </div>
       </div>
 
-      <aside class="spec reveal d2" id="spec" aria-label="점검 예시">
-        <div class="spec-head">
-          <span>세부능력 및 특기사항</span>
-          <b>1,187 / 1,500 byte</b>
-        </div>
-        <div class="meter" aria-hidden="true"><i></i></div>
-        <p class="spec-sample">
-          수업 중 제시된 자료를 스스로 재구성하여 발표하였으며, 모둠 활동에서
-          <mark>열심히</mark> 참여하는 등 <mark>성실한 모습을 보임.</mark>
-        </p>
-        <p class="spec-note">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-alert"/></svg>
-          <span>추상적 표현 1건, 직전 학기와 중복된 문장 1건이 확인되었습니다.</span>
-        </p>
-      </aside>
-    </div>
-  </section>
-
-  <section class="tools wrap" id="tools">
-    <div class="sec-head reveal">
-      <h2>도구</h2>
-      <p>명석고등학교 안에서 쓰이는 것들입니다. 새로 만드는 것이 생기면 이곳에 추가됩니다.</p>
-    </div>
-
-    <div class="bento">
-
-      <article class="card card-lg reveal">
-        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-file"/></svg></div>
-        <h3>명석한 생기부 <span class="tag">운영 중</span></h3>
-        <p>
-          나이스에서 내려받은 학교생활기록부 산출물을 읽어, 기재요령 위반·문장 중복·미입력 항목을
-          한 번에 찾아 주는 Windows 프로그램입니다. 관리자용과 교사용 두 가지로 나뉘며,
-          학생 정보는 교내망 서버 밖으로 나가지 않습니다.
-        </p>
-        <ul class="facts">
-          <li><b>형태</b><span>Windows 데스크톱 (관리자용 · 교사용)</span></li>
-          <li><b>배포 범위</b><span>명석고등학교 교내</span></li>
-          <li><b>데이터 보관</b><span>교내망 서버 (외부 공개 없음)</span></li>
-        </ul>
-        <div class="card-foot">
-          <a class="chip" href="/ms-record-linter/privacy.html">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg>
-            개인정보 처리방침
-          </a>
-        </div>
-      </article>
-
-      <a class="card reveal d1" href="https://mshs.djsch.kr/">
-        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-cap"/></svg></div>
-        <h3>학교 공식 홈페이지 <span class="tag tag-quiet">외부</span></h3>
-        <p>학사일정, 공지사항, 입학 안내는 명석고등학교 공식 홈페이지에서 확인하실 수 있습니다.</p>
-        <span class="card-link">
-          mshs.djsch.kr
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ext"/></svg>
-        </span>
-      </a>
-
-      <a class="card reveal d2" href="mailto:khwarang2000@ms.hs.kr">
-        <div class="card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-mail"/></svg></div>
-        <h3>문의 · 제보</h3>
-        <p>쓰시다 불편한 점이나 오류를 알려 주세요. 새로 필요한 도구에 대한 제안도 환영합니다.</p>
-        <span class="card-link go">
-          khwarang2000@ms.hs.kr
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-arrow"/></svg>
-        </span>
-      </a>
-
+      <div class="mark-wrap reveal d2">
+        <img src="/assets/logo-mark.png" alt="명석고등학교 교표" width="1440" height="1464">
+      </div>
     </div>
   </section>
 </main>
@@ -751,17 +455,16 @@ h1 em::after {
     <div class="foot-grid">
       <div>
         <div style="color:var(--fg);font-weight:600;margin-bottom:4px">ms.hs.kr</div>
-        만든 사람 · 김보성 (명석고등학교)
+        운영 · 김보성 (명석고등학교)
       </div>
       <nav class="foot-links" aria-label="바닥글">
-        <a href="/ms-record-linter/privacy.html">개인정보 처리방침</a>
         <a href="https://mshs.djsch.kr/">학교 공식 홈페이지</a>
         <a href="mailto:khwarang2000@ms.hs.kr">khwarang2000@ms.hs.kr</a>
       </nav>
     </div>
     <p class="disclaim">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-alert"/></svg>
-      <span><b>이 사이트는 명석고등학교 공식 홈페이지가 아닙니다.</b> 교사 개인이 만든 교내 도구를 안내하기 위한 페이지이며, 학교의 공식 안내는 <a href="https://mshs.djsch.kr/">mshs.djsch.kr</a>을 이용해 주세요.</span>
+      <span><b>이 사이트는 명석고등학교 공식 홈페이지가 아닙니다.</b> 학교의 공식 안내는 <a href="https://mshs.djsch.kr/">mshs.djsch.kr</a>을 이용해 주세요.</span>
     </p>
   </div>
 </footer>
@@ -769,7 +472,6 @@ h1 em::after {
 <script>
 (function () {
   var root = document.documentElement;
-  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* theme toggle */
   var saved = null;
@@ -798,25 +500,6 @@ h1 em::after {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-
-  /* card tilt + spotlight */
-  if (!reduce && matchMedia('(hover: hover)').matches) {
-    document.querySelectorAll('.card').forEach(function (card) {
-      card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width;
-        var py = (e.clientY - r.top) / r.height;
-        card.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
-        card.style.setProperty('--my', (py * 100).toFixed(1) + '%');
-        card.style.setProperty('--rx', ((0.5 - py) * 4).toFixed(2) + 'deg');
-        card.style.setProperty('--ry', ((px - 0.5) * 4).toFixed(2) + 'deg');
-      });
-      card.addEventListener('pointerleave', function () {
-        card.style.setProperty('--rx', '0deg');
-        card.style.setProperty('--ry', '0deg');
-      });
-    });
-  }
 })();
 </script>
 </body>
