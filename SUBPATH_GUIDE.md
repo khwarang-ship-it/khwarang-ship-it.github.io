@@ -5,27 +5,26 @@
 
 ## 먼저 확인할 것 — 정적인가, 서버가 필요한가
 
-- **정적 페이지/앱** (순수 HTML·CSS·JS로 빌드 결과가 끝나는 것, 또는 `next export` 같은
-  정적 내보내기가 가능한 것) → 아래 **방법 A/B**(GitHub Pages 기반). 지금 이 방식으로
-  DNS가 `ms.hs.kr`을 서빙하고 있는 동안에만 유효.
-- **서버가 필요한 앱** (로그인/세션, API 라우트, SSR, DB 연결, 쿠키 기반 게이트 등) →
-  GitHub Pages로는 애초에 안 된다(정적 파일만 서빙, 프록시 기능 없음). **방법 C**(Vercel
-  rewrite)로 간다. `mshs-curriculm`(currifair)이 이 경우였다.
+`ms.hs.kr`은 2026-08-10부로 Vercel이 서빙한다(예전엔 GitHub Pages). 그래서:
 
-## 왜 방법 A/B가 되는가 (GitHub Pages 기반, 정적 전용)
+- **정적 페이지/앱** (순수 HTML·CSS·JS로 빌드 결과가 끝나는 것, 또는 `next export` 같은
+  정적 내보내기가 가능한 것) → **방법 A**(이 레포 안에 폴더로 추가). Vercel도 정적
+  파일을 그대로 서빙하므로 여전히 제일 간단한 방법이다.
+- **서버가 필요한 앱** (로그인/세션, API 라우트, SSR, DB 연결, 쿠키 기반 게이트 등) →
+  **방법 C**(Vercel rewrite). `mshs-curriculm`(currifair)이 이 경우였다.
+- **방법 B(형제 GitHub Pages 레포 자동 전파)는 더 이상 안 쓴다** — GitHub Pages 시절
+  구조였고, DNS가 Vercel을 보는 지금은 동작하지 않는다. 아래 설명은 과거 기록 및
+  "왜 이 구조를 버렸는지" 참고용으로 남겨둔다.
+
+## (과거 기록) 방법 A/B가 성립했던 이유 — GitHub Pages 시절
 
 이 레포(`khwarang-ship-it/khwarang-ship-it.github.io`)는 이름이 정확히
 `계정이름.github.io`라서 GitHub Pages가 이 레포를 **유저 사이트**로 취급하고, 여기 걸린
 커스텀 도메인(`ms.hs.kr`, `CNAME` 파일)이 **같은 계정의 다른 레포에도 자동으로
 전파**된다. 다른 레포가 자기만의 커스텀 도메인을 따로 설정하지 않으면, GitHub Pages를
 켜는 순간 `ms.hs.kr/그레포이름/`으로 자동으로 뜬다. (자세한 배경은 이 레포의
-[`CLAUDE.md`](CLAUDE.md) 참고.)
-
-**⚠️ `ms.hs.kr`이 Vercel로 이전(컷오버)되면 이 전파 메커니즘 자체가 끊긴다** — DNS가
-더 이상 GitHub Pages를 보지 않기 때문. 이전 완료 후 방법 A는 여전히 유효하다(이 레포
-자체가 Vercel에서도 정적 파일을 그대로 서빙하므로, 폴더만 추가하면 됨). **방법 B(형제
-레포 자동 전파)는 컷오버 후 동작하지 않는다** — 새 프로젝트는 방법 A 또는 방법 C로 간다.
-현재 이전 진행 상황은 `CLAUDE.md`의 "호스팅: GitHub Pages → Vercel 이전 진행 중" 참고.
+[`CLAUDE.md`](CLAUDE.md) 참고.) 이전 배경·실제로 겪은 버그들은 `CLAUDE.md`의
+"호스팅: GitHub Pages → Vercel 이전 완료" 참고.
 
 ## 방법 A — 이 레포 안에 폴더로 추가 (가벼운 정적 페이지 1~2장일 때 권장)
 
@@ -83,23 +82,37 @@ gh api repos/khwarang-ship-it/khwarang-ship-it.github.io/pages/builds/latest --j
 
    실제 사례: `mshs-curriculm` 레포의 커밋 `Add basePath for serving under
    ms.hs.kr/currifair/ via Vercel rewrite`에 이 항목들을 전부 고친 예시가 있다.
-3. 이 레포(`khwarang-ship-it.github.io`)를 Vercel에 별도 프로젝트로 배포한다
-   (프레임워크 없음/정적으로 인식되면 그대로 둔다).
+3. 앱 레포도 GitHub 연동으로 Vercel 프로젝트를 만들면(vercel.com → Add New → Project
+   → 레포 선택) 이후 `main` push마다 자동 배포된다 — 대시보드를 매번 다시 열 필요 없다.
+   이 레포(`khwarang-ship-it.github.io`)는 이미 Vercel에 연결돼 있고 `ms.hs.kr` 도메인도
+   붙어 있으니, 새 앱을 붙일 땐 그 앱 레포만 새로 Vercel에 연결하면 된다.
 4. 이 레포의 `vercel.json`에 rewrite 규칙을 추가한다 — 와일드카드 규칙만으로는 세그먼트
    0개(경로 자체)를 못 잡으므로 반드시 둘 다 넣는다:
    ```json
    {
+     "trailingSlash": false,
      "rewrites": [
        { "source": "/프로젝트이름", "destination": "https://<프로젝트>.vercel.app/프로젝트이름" },
        { "source": "/프로젝트이름/:path*", "destination": "https://<프로젝트>.vercel.app/프로젝트이름/:path*" }
      ]
    }
    ```
-5. 루트 포털 Vercel 프로젝트의 Settings → Domains에 `ms.hs.kr`을 연결하고(아직 안
-   돼 있다면 — 컷오버 자체는 사용자가 가비아 DNS를 직접 바꿔야 완료된다), 가비아 DNS를
-   Vercel이 알려주는 값으로 바꾼다. **이 문서에 박힌 값을 쓰지 말고 그때그때 Vercel
-   대시보드가 보여주는 실제 값을 쓴다** — 시기/프로젝트마다 달라질 수 있다고 Vercel
-   문서에 명시돼 있다.
+   **`"trailingSlash": false`를 빠뜨리지 말 것** — Next.js 앱은 대부분 슬래시 붙은
+   경로(`/프로젝트이름/`)를 자체적으로 308 리다이렉트하는데, 이게 rewrite 프록시를
+   못 넘어가고 루트 프로젝트에서 `X-Vercel-Error: NOT_FOUND`(플랫폼 레벨 404)로
+   튕긴다. currifair 배포 때 실제로 겪은 버그 — Vercel 엣지에서 슬래시를 먼저
+   정리하도록 이 설정으로 우회한다.
+5. **`next=`류 리다이렉트-후-복귀 쿼리 파라미터에 `basePath`를 수동으로 붙이지 말 것.**
+   미들웨어의 `NextResponse.redirect(new URL("/어딘가", ...))`(redirect 대상 자체)는
+   `basePath`를 직접 붙여야 하지만, 그 쿼리 파라미터 값이 나중에 `redirect()`나
+   `router.push()`(둘 다 `next/navigation`)로 들어간다면 그쪽이 `next/link`처럼
+   `basePath`를 스스로 붙인다 — 여기서도 수동으로 붙이면 두 번 겹쳐서
+   (`/프로젝트이름/프로젝트이름/...`) 404가 난다. currifair의 게이트→기수선택
+   리다이렉트 체인에서 실제로 겪은 버그(`mshs-curriculm`의 `docs/DECISIONS.md` #30).
+6. 도메인이 아직 안 붙어 있는 첫 서브패스 프로젝트라면, 루트 포털 Vercel 프로젝트의
+   Settings → Domains에 `ms.hs.kr`을 연결하고 가비아 DNS를 Vercel이 알려주는 값으로
+   바꾼다. **이 문서에 박힌 값을 쓰지 말고 그때그때 Vercel 대시보드가 보여주는 실제
+   값을 쓴다** — 시기/프로젝트마다 달라질 수 있다고 Vercel 문서에 명시돼 있다.
 
 ## 반드시 지킬 것
 

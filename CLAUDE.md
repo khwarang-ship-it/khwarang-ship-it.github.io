@@ -10,10 +10,11 @@ GitHub Pages의 "커스텀 도메인이 형제 프로젝트 레포에 자동 전
 바꾸면 이 기능이 깨지므로 그 이름은 다시 쓰지 않는다.
 
 - `index.html` — 루트 랜딩 페이지 (아래 참고)
-- `CNAME` — `ms.hs.kr`. Vercel로 호스팅을 옮긴 뒤에는 더 이상 이 값이 실제 서빙에
-  쓰이지 않지만(아래 "호스팅: GitHub Pages → Vercel" 참고), DNS 컷오버 전까지는
-  절대 지우지 말 것 — 지우면 그 순간 커스텀 도메인이 끊김
-- `vercel.json` — `/currifair` 서브패스를 currifair의 Vercel 배포로 넘기는 rewrite 설정
+- `CNAME` — `ms.hs.kr`. 호스팅이 Vercel로 이전 완료된 뒤로는 실제 서빙에 쓰이지
+  않는다(도메인은 이제 Vercel Domains 설정이 담당). GitHub Pages 쪽 레거시 설정이라
+  지워도 무방하지만, 굳이 지울 이유도 없어 남겨둠.
+- `vercel.json` — `/currifair` 서브패스를 currifair의 Vercel 배포로 넘기는 rewrite 설정.
+  `"trailingSlash": false`도 여기서 지정 — 이유는 아래 "겪은 버그" 참고.
 - `assets/logo.png`, `assets/logo.ico` — 명석고 실제 교표. `assets/logo-mark.png`는
   `logo.png`에서 흰 배경을 투명 처리하고 여백을 잘라낸 파생 이미지 (재생성 방법은 아래)
 - `ms-record-linter/privacy.html` — 「명석한 생기부」 개인정보 처리방침. 루트 페이지에서
@@ -21,42 +22,55 @@ GitHub Pages의 "커스텀 도메인이 형제 프로젝트 레포에 자동 전
 
 ## 배포
 
-빌드 없음. `main`에 push하면 서빙 주체(현재 GitHub Pages, 컷오버 후 Vercel)가 그대로
-반영한다.
+빌드 없음. `main`에 push하면 Vercel이 자동 배포한다(GitHub App 연동, 대시보드 조작
+불필요). 배포 상태는 Vercel 대시보드에서 확인하거나, 아래처럼 배포된 페이지를 직접
+찔러서 확인한다.
 
 ```bash
 git push origin main
-# GitHub Pages 배포 확인 (컷오버 전까지 유효, 보통 30~60초):
-gh api repos/khwarang-ship-it/khwarang-ship-it.github.io/pages/builds/latest --jq .status
+# 30~60초 후 반영 확인:
+curl -sI https://ms.hs.kr/ | head -5
 ```
 
-## 호스팅: GitHub Pages → Vercel 이전 진행 중
+## 호스팅: GitHub Pages → Vercel 이전 완료 (2026-08-10)
 
-`mshs-curriculm`(선택과목 박람회, "currifair")을 `ms.hs.kr/currifair/`에 붙이면서
-호스팅 주체를 GitHub Pages에서 Vercel로 옮기는 중이다. `mshs-curriculm`은 로그인 게이트·
-AI 상담·실시간 데이터 갱신이 있는 Next.js **서버** 앱이라 정적 파일만 서빙하는 GitHub
+`mshs-curriculm`(선택과목 박람회, "currifair")을 `ms.hs.kr/currifair/`에 붙이기 위해
+호스팅 주체를 GitHub Pages에서 Vercel로 옮겼다. `mshs-curriculm`은 로그인 게이트·AI
+상담·실시간 데이터 갱신이 있는 Next.js **서버** 앱이라 정적 파일만 서빙하는 GitHub
 Pages로는 애초에 붙일 수 없었다(경로 기반 프록시 기능이 없음).
 
-**구조**: 이 레포(루트 포털, 정적)와 `mshs-curriculm`(currifair, Next.js)을 각각 별도
-Vercel 프로젝트로 배포하고, 이 레포의 `vercel.json`이 `/currifair`, `/currifair/:path*`
-요청만 currifair의 Vercel 배포 주소로 rewrite한다. 그 외 경로는 전부 이 레포가 그대로
-서빙(정적 파일이라 프레임워크 불필요).
+**구조**: 이 레포(루트 포털, 정적)와 `mshs-curriculm`(currifair, Next.js)이 각각 별도
+Vercel 프로젝트(둘 다 GitHub 연동, `main` push 시 자동 배포)로 떠 있고, 이 레포의
+`vercel.json`이 `/currifair`, `/currifair/:path*` 요청만 currifair의 Vercel 배포
+주소(`https://mshs-curriculm.vercel.app`)로 rewrite한다. 그 외 경로는 전부 이 레포가
+정적으로 직접 서빙. `ms.hs.kr`/`www.ms.hs.kr`은 가비아 DNS가 GitHub Pages A레코드에서
+Vercel 값으로 바뀌어 있고(apex는 www로 308 canonical redirect, Vercel 기본 동작), 루트
+포털 Vercel 프로젝트의 Domains에 연결돼 있다.
 
-- `vercel.json`의 `<currifair-프로젝트>.vercel.app` 플레이스홀더는 currifair를 실제
-  Vercel에 배포한 뒤 나온 진짜 배포 URL로 교체해야 한다.
-- `mshs-curriculm` 쪽은 `next.config.mjs`에 `basePath: '/currifair'`를 추가했고,
-  `basePath`가 자동으로 못 챙기는 지점들(`next/image` 리터럴 `src`, 클라이언트 `fetch()`
-  호출, 미들웨어의 `NextResponse.redirect()`)은 전부 개별 수정 완료 — 자세한 내용은 그
-  레포의 커밋 메시지(`Add basePath for serving under ms.hs.kr/currifair/ via Vercel
-  rewrite`) 참고.
-- **가비아 DNS와 Vercel 프로젝트/도메인 설정은 계정 접근이 필요해 AI가 대신 실행할 수
-  없다.** `ms.hs.kr` A 레코드를 GitHub Pages용 4개에서 Vercel 값으로 바꾸는 컷오버는
-  사용자가 직접 Vercel 대시보드에서 진행해야 한다.
-- 컷오버가 끝나기 전까지는 지금처럼 GitHub Pages가 계속 `ms.hs.kr`을 서빙하고
-  `https://ms.hs.kr/currifair/`는 아직 열리지 않는다(rewrite 대상 프로젝트가 Vercel에
-  없으므로) — 이 사이의 과도기 상태는 정상이다.
-- 컷오버 후에는 아래 "서브패스 만들기" 방법 B(형제 GitHub Pages 레포 자동 전파)가 더
-  이상 동작하지 않는다 — `SUBPATH_GUIDE.md`의 방법 C(Vercel rewrite)를 대신 쓴다.
+**실제 배포하면서 터진 버그 2건** (둘 다 수정·배포 완료):
+1. **`/currifair/`처럼 트레일링 슬래시가 붙은 모든 경로가 404.** currifair 앱이
+   슬래시 붙은 요청을 자체적으로 308 리다이렉트하는데, 그 리다이렉트가 외부 오리진
+   rewrite 프록시를 그대로 못 넘어가고 루트 프로젝트에서 `X-Vercel-Error: NOT_FOUND`로
+   튕겼다. 이 레포의 `vercel.json`에 `"trailingSlash": false`를 추가해 Vercel 엣지
+   단계에서 슬래시를 먼저 정리하도록 해서 해결(이 레포 쪽만 수정, currifair 코드는
+   안 건드림).
+2. **게이트 PIN 입력 → 학년 선택을 마치면 404.** `mshs-curriculm`의 `proxy.ts`가
+   `next=` 리다이렉트 대상 쿼리 파라미터에 `basePath`(`/currifair`)를 직접 붙였는데,
+   그 값이 나중에 `redirect()`/`router.push()`(`next/navigation`, `next/link`처럼
+   `basePath`를 스스로 붙임)로 들어가면서 게이트→기수선택 단계마다 겹쳐 붙어
+   (`/currifair/currifair/currifair/...`) 존재하지 않는 경로에 도달했다.
+   `mshs-curriculm` 레포의 `proxy.ts`에서 `next=` 값의 수동 접두를 제거해 해결.
+3. **`ms.hs.kr/currifair/` 홈 화면이 게이트 없이 그냥 열림** (세부 메뉴로 들어가야만
+   PIN이 뜸). `proxy.ts`의 negative-lookahead 정규식 matcher가 `basePath` 루트
+   경로에서 안 걸리는 버그 — Next.js/Vercel 쪽 알려진 이슈군(vercel/next.js#86701,
+   #86269)과 일치. matcher를 `/:path*`(전체 매칭)로 단순화하고 제외 로직을 함수
+   본문으로 옮겨서 해결.
+
+   위 3건 자세한 내용은 `mshs-curriculm`의 `docs/DECISIONS.md` #30 참고.
+
+새로 서브패스를 붙이고 싶으면 `SUBPATH_GUIDE.md`의 방법 A(이 레포 안 폴더, 정적) 또는
+방법 C(Vercel rewrite, 서버 앱)를 쓴다. **방법 B(형제 GitHub Pages 레포 자동 전파)는
+DNS가 더 이상 GitHub Pages를 안 보므로 이제 동작하지 않는다.**
 
 ## 루트 페이지(index.html) 정책 — 중요
 
