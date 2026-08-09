@@ -1,5 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": false,
   "rewrites": [
     { "source": "/currifair", "destination": "https://mshs-curriculm.vercel.app/currifair" },
     { "source": "/currifair/:path*", "destination": "https://mshs-curriculm.vercel.app/currifair/:path*" }
