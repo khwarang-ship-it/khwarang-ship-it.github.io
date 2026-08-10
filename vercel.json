@@ -1,6 +1,20 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "currifair.ms.hs.kr" }],
+      "destination": "https://ms.hs.kr/currifair",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "currifair.ms.hs.kr" }],
+      "destination": "https://ms.hs.kr/currifair/:path*",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/currifair", "destination": "https://mshs-curriculm.vercel.app/currifair" },
     { "source": "/currifair/:path*", "destination": "https://mshs-curriculm.vercel.app/currifair/:path*" }
