@@ -14,7 +14,9 @@ GitHub Pages의 "커스텀 도메인이 형제 프로젝트 레포에 자동 전
   않는다(도메인은 이제 Vercel Domains 설정이 담당). GitHub Pages 쪽 레거시 설정이라
   지워도 무방하지만, 굳이 지울 이유도 없어 남겨둠.
 - `vercel.json` — `/currifair` 서브패스를 currifair의 Vercel 배포로 넘기는 rewrite 설정.
-  `"trailingSlash": false`도 여기서 지정 — 이유는 아래 "겪은 버그" 참고.
+  `"trailingSlash": false`도 여기서 지정 — 이유는 아래 "겪은 버그" 참고. `redirects`에는
+  옛 서브도메인 `currifair.ms.hs.kr`을 `ms.hs.kr/currifair/*`로 경로 보존 리다이렉트하는
+  규칙도 있다(Host 헤더 조건부 — 아래 "옛 서브도메인 리다이렉트" 참고).
 - `assets/logo.png`, `assets/logo.ico` — 명석고 실제 교표. `assets/logo-mark.png`는
   `logo.png`에서 흰 배경을 투명 처리하고 여백을 잘라낸 파생 이미지 (재생성 방법은 아래)
 - `ms-record-linter/privacy.html` — 「명석한 생기부」 개인정보 처리방침. 루트 페이지에서
@@ -71,6 +73,22 @@ Vercel 값으로 바뀌어 있고(apex는 www로 308 canonical redirect, Vercel 
 새로 서브패스를 붙이고 싶으면 `SUBPATH_GUIDE.md`의 방법 A(이 레포 안 폴더, 정적) 또는
 방법 C(Vercel rewrite, 서버 앱)를 쓴다. **방법 B(형제 GitHub Pages 레포 자동 전파)는
 DNS가 더 이상 GitHub Pages를 안 보므로 이제 동작하지 않는다.**
+
+## 옛 서브도메인 리다이렉트 (`currifair.ms.hs.kr` → `ms.hs.kr/currifair/*`)
+
+currifair를 처음 검토할 때 서브도메인 방식(`currifair.ms.hs.kr`)도 고려해서 가비아에
+CNAME을 미리 걸어뒀던 적이 있다. 최종적으로 경로 방식(`ms.hs.kr/currifair/`)으로 결정한
+뒤에도 그 DNS 레코드는 남아있었고, 옛 링크가 안 죽게 리다이렉트로 연결했다.
+
+**Vercel 대시보드의 "Redirect to Another Domain" 도메인 설정은 쓰지 않는다** —
+도메인만 받고 경로(`/currifair`)는 못 받아서(슬래시 들어간 값을 넣으면 Save가
+비활성화됨) `ms.hs.kr/currifair`처럼 경로가 있는 대상으로는 애초에 설정이 안 된다.
+대신 `currifair.ms.hs.kr`을 이 프로젝트에 **"Connect to an environment" (Production)**
+로 붙이고, `vercel.json`의 `redirects`에 `has: [{ type: "host", value:
+"currifair.ms.hs.kr" }]` 조건부 규칙으로 직접 처리한다 — 이러면 경로까지 그대로
+보존해서(`currifair.ms.hs.kr/majors` → `ms.hs.kr/currifair/majors`) 308 리다이렉트된다.
+`/`(루트)와 `/:path*`를 따로 나눈 이유는 앞서 겪은 것과 같은 이유(와일드카드가 세그먼트
+0개를 못 잡음).
 
 ## 루트 페이지(index.html) 정책 — 중요
 
