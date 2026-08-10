@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M-Desk — 개인정보 처리방침</title>
+<style>
+  :root {
+    --fg: #1f2937;
+    --bg: #ffffff;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #16324f;
+    --accent-2: #2f6b4f;
+    --accent-2-tint: #e9f3ee;
+    --table-head: #e9f3ee;
+    --note-bg: #fffbea;
+    --note-border: #fbe6a2;
+    --note-text: #7a5c0a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Malgun Gothic", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    color: var(--fg);
+    background: var(--bg);
+    line-height: 1.7;
+  }
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+    counter-reset: article;
+  }
+  h1 {
+    font-size: 1.7rem;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 20px;
+  }
+  .meta div { margin: 2px 0; }
+  .accent-divider {
+    height: 3px;
+    background: var(--accent-2);
+    border: none;
+    margin: 0 0 24px;
+  }
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .toc a {
+    background: var(--accent-2-tint);
+    color: var(--accent-2);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  .toc a:hover { text-decoration: underline; }
+  h2 {
+    counter-increment: article;
+    font-size: 1.15rem;
+    color: var(--accent);
+    margin-top: 2.6em;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    scroll-margin-top: 16px;
+  }
+  h2::before {
+    content: counter(article);
+    flex: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  p, li { font-size: 0.98rem; }
+  ol, ul { padding-left: 1.4em; }
+  li { margin: 0.4em 0; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0 1.6em;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: var(--table-head); color: var(--accent); }
+  .basis {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-top: 0.6em;
+  }
+  .note {
+    background: var(--note-bg);
+    border: 1px solid var(--note-border);
+    color: var(--note-text);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    margin: 1em 0;
+  }
+  .contact {
+    margin-top: 3em;
+    padding-top: 1.6em;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+  a { color: #2563eb; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fg: #e5e7eb;
+      --bg: #111827;
+      --muted: #9ca3af;
+      --border: #374151;
+      --accent: #93c5fd;
+      --accent-2: #6ee7b7;
+      --accent-2-tint: #10261d;
+      --table-head: #1f2937;
+      --note-bg: #3f2f0a;
+      --note-border: #6b5111;
+      --note-text: #fde68a;
+    }
+    h2::before { color: #111827; }
+    a { color: #60a5fa; }
+  }
+  @media (max-width: 480px) {
+    .toc { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>M-Desk 개인정보처리방침</h1>
+<div class="meta">
+  <div>시행일: 2026년 8월 10일 · 버전: 1.0</div>
+  <div>운영자: 김보성 (사업자 미등록 개인 교사 운영, 명석고등학교)</div>
+  <div>제품: M-Desk — 명석고등학교 교사 전용 바탕화면 위젯 (Windows 데스크톱 프로그램)</div>
+</div>
+<hr class="accent-divider">
+
+<nav class="toc">
+  <a href="#art-1">제1조 총칙</a>
+  <a href="#art-2">제2조 처리항목</a>
+  <a href="#art-3">제3조 처리목적</a>
+  <a href="#art-4">제4조 보유기간</a>
+  <a href="#art-5">제5조 제3자 제공</a>
+  <a href="#art-6">제6조 위탁·국외이전</a>
+  <a href="#art-7">제7조 정보주체 권리</a>
+  <a href="#art-8">제8조 아동보호</a>
+  <a href="#art-9">제9조 안전조치</a>
+  <a href="#art-10">제10조 보호책임자</a>
+  <a href="#art-11">제11조 변경고지</a>
+</nav>
+
+<p>김보성(이하 "운영자")은 명석고등학교 교사 전용 바탕화면 위젯 프로그램 <strong>M-Desk</strong>(이하 "이 프로그램")를 운영하며, 「개인정보 보호법」 및 「초·중등교육법」 제29조의2에 따라 아래와 같이 개인정보처리방침을 정합니다.</p>
+
+<h2 id="art-1">제1조 (총칙·데이터 구조)</h2>
+<p>이 프로그램은 명석고등학교 교사가 각자의 업무용 PC에 설치해 혼자 사용하는 바탕화면 위젯이며, <strong>학생이 직접 로그인하거나 정보를 입력하는 화면은 없습니다.</strong> 배포 범위는 명석고등학교 교내로 한정되며, 다른 학교로 배포될 경우 이 방침을 재점검·갱신합니다.</p>
+<p>이 프로그램이 다루는 개인정보는 두 갈래입니다.</p>
+<ol>
+  <li><strong>학생 개인정보</strong> — 교사가 명렬표 카드를 열람할 때, 교내망 연동 시스템("명석이" 서버)에 저장된 학생 정보를 그때그때 조회해 화면에 표시만 합니다. <strong>이 프로그램 자체에는 학생 정보가 저장되지 않습니다</strong>(로컬 캐시 없음).</li>
+  <li><strong>교사(이용자 본인) 개인정보</strong> — 이 프로그램을 사용하는 교사 본인의 정보로, 설정값과 함께 로컬 PC에 저장됩니다.</li>
+</ol>
+
+<h2 id="art-2">제2조 (처리하는 개인정보 항목)</h2>
+<table>
+  <tr><th>구분</th><th>항목</th><th>수집 방법</th><th>저장 위치</th></tr>
+  <tr><td>학생 정보 (조회만, 미저장)</td><td>학년, 반, 번호, 성명</td><td>명석이 서버 <code>GET /roster/students</code> 실시간 조회</td><td>저장 안 함 (화면 표시 후 폐기)</td></tr>
+  <tr><td>교사 본인 정보</td><td>성명, 담임 여부, 학년/반, 부서</td><td>명석이 서버 <code>GET /whoami</code> 자동 조회 또는 교사 수동 입력</td><td>로컬 <code>%APPDATA%\com.mdesk.desktop\settings.json</code></td></tr>
+  <tr><td>인증 토큰</td><td>명석이 서버 접속 토큰(Bearer)</td><td>교사가 설정에 직접 입력</td><td>로컬 <code>settings.json</code></td></tr>
+  <tr><td>Google 계정 연동 정보</td><td>Google Calendar/Tasks OAuth 토큰, 교사가 입력한 일정·할 일 내용</td><td>교사가 이 프로그램에서 자기 Google 계정으로 직접 로그인(OAuth)</td><td>로컬 <code>google_calendar_tokens.json</code> (원본 데이터는 Google 서버)</td></tr>
+  <tr><td>급식 정보 조회용</td><td>학교 코드, 날짜 (개인정보 아님)</td><td>나이스(NEIS) 공개 API 조회</td><td>저장 안 함</td></tr>
+</table>
+<p>이 프로그램은 사진, 생년월일, 주소, 연락처, 주민등록번호 등은 수집하지 않습니다.</p>
+<div class="basis">근거: 「개인정보 보호법」 제15·16·30조</div>
+
+<h2 id="art-3">제3조 (처리 목적)</h2>
+<ul>
+  <li>학생 명렬표 조회: 교사가 담당 학급·학년 학생을 확인하기 위한 업무 편의 기능</li>
+  <li>교사 신원 자동 인식: 시간표·명렬표 카드에서 담당 교사를 자동으로 맞춰 표시</li>
+  <li>Google 캘린더/할 일 연동: 교사 본인의 일정·할 일을 위젯에서 등록·확인</li>
+  <li>급식 정보 표시: 당일 급식 메뉴를 위젯에 표시</li>
+</ul>
+<div class="basis">근거: 「개인정보 보호법」 제3조, 제15조, 제30조제1항제1호</div>
+
+<h2 id="art-4">제4조 (보유기간)</h2>
+<ul>
+  <li><strong>학생 명렬표 데이터</strong>: 저장하지 않습니다. 카드를 열 때마다 서버에서 새로 조회하고, 화면을 닫으면 표시된 내용은 폐기됩니다.</li>
+  <li><strong>교사 본인 설정·토큰</strong>: 이 프로그램을 사용하는 동안 로컬 PC에 보관되며, 프로그램을 삭제하거나 설정에서 직접 초기화하면 함께 삭제됩니다.</li>
+  <li><strong>Google 계정 데이터</strong>: 로컬에는 접속 토큰만 보관하며, 일정·할 일 원본은 교사 본인의 Google 계정에 있습니다. 삭제는 이 프로그램의 로그아웃 또는 Google 계정 자체에서 가능합니다.</li>
+</ul>
+<div class="basis">근거: 「개인정보 보호법」 제21조, 제30조제1항제2호·제3호의2</div>
+
+<h2 id="art-5">제5조 (제3자 제공)</h2>
+<p>이 프로그램은 처리하는 개인정보를 외부 제3자에게 제공하지 않습니다. 명석이 서버로부터 학생·교사 정보를 <strong>조회</strong>하는 것은 교내 연동 시스템 간 데이터 흐름이며, 이 프로그램이 별도로 제3자에게 정보를 제공하는 행위가 아닙니다.</p>
+<div class="basis">근거: 「개인정보 보호법」 제17조, 제30조제1항제3호</div>
+
+<h2 id="art-6">제6조 (위탁 및 국외이전)</h2>
+<table>
+  <tr><th>수탁자/이전 대상</th><th>처리 내용</th><th>위치</th></tr>
+  <tr><td>명석고등학교 교내 연동 시스템("명석이" 서버)</td><td>학생 명렬표, 교사 신원 정보 조회</td><td>학교 교내망(고정 IP), 국내</td></tr>
+  <tr><td>Google LLC</td><td>교사 본인이 등록한 캘린더 일정·할 일 저장 (Google Calendar/Tasks API, OAuth 인증)</td><td>해외 서버</td></tr>
+  <tr><td>나이스(NEIS, 교육정보시스템)</td><td>급식 메뉴 공개 정보 조회 (개인정보 미포함)</td><td>국내, 국가 공식 API</td></tr>
+</table>
+<p>Google 연동은 교사 본인이 자신의 개인 Google 계정으로 직접 로그인해 자신의 일정·할 일을 관리하는 기능이며, 학생 개인정보는 Google로 전송되지 않습니다. 명석이 서버는 이 프로그램과 별개로 운영되는 교내 시스템으로, 해당 시스템 자체의 개인정보 처리에 관한 사항은 그 시스템의 별도 개인정보처리방침을 따릅니다.</p>
+<p>이 프로그램은 위 외에 어떠한 외부 AI 서비스(예: OpenAI, Anthropic 등)와도 연동하지 않으며, 개인정보를 AI 모델 학습·개선 목적으로 제공하지 않습니다.</p>
+<div class="basis">근거: 「개인정보 보호법」 제26조, 제28조의8, 제30조제1항제4호</div>
+
+<h2 id="art-7">제7조 (정보주체의 권리)</h2>
+<p>교사(이용자) 본인은 아래 방법으로 자신의 정보에 대한 열람·정정·삭제를 요청할 수 있습니다.</p>
+<ul>
+  <li>로컬 저장 정보(설정, 토큰): 이 프로그램의 설정 화면에서 직접 확인·수정·삭제 가능</li>
+  <li>Google 계정 정보: 이 프로그램의 Google 로그아웃 기능 또는 Google 계정 자체 설정에서 처리</li>
+  <li>그 외 문의: 아래 제10조의 보호책임자에게 이메일로 요청</li>
+</ul>
+<p>학생 명렬표 정보는 이 프로그램에 저장되지 않으므로, 학생 정보 자체에 대한 열람·정정·삭제 요청은 명석고등학교 및 명석이 서버 운영 주체(제6조)를 통해 처리합니다.</p>
+<div class="basis">근거: 「개인정보 보호법」 제35~37조, 제30조제1항제5호</div>
+
+<h2 id="art-8">제8조 (만 14세 미만 아동의 개인정보 보호)</h2>
+<p>이 프로그램은 교사가 업무용 PC에 설치해 사용하는 프로그램으로, <strong>학생(만 14세 미만 포함)이 직접 로그인하거나 개인정보를 입력하는 기능이 없습니다.</strong> 학생 정보는 교사가 명석이 서버에서 조회해 화면에 표시만 하며, 이 과정에서 학생 본인 또는 법정대리인의 별도 동의 절차는 이 프로그램 단에서 발생하지 않습니다. 학생 개인정보 수집·이용에 대한 동의는 명석이 서버 및 학교 차원의 절차를 따릅니다.</p>
+<div class="basis">근거: 「개인정보 보호법」 제22조의2</div>
+
+<h2 id="art-9">제9조 (안전조치)</h2>
+<ul>
+  <li>명석이 서버 접속은 Bearer 토큰 인증을 사용하며, 토큰은 로컬 PC의 사용자별 설정 폴더에만 저장됩니다.</li>
+  <li>학생 명렬표는 로컬에 캐시하지 않아, PC 분실·유출 시에도 학생 정보가 로컬 파일로 남지 않습니다.</li>
+  <li>Google OAuth 토큰은 로컬 사용자별 설정 폴더에 저장되며, 이 프로그램 밖으로 별도 전송하지 않습니다.</li>
+  <li>이 프로그램은 별도의 로그 파일이나 캐시 파일을 생성하지 않습니다(오류는 콘솔 출력에만 남고 저장되지 않음).</li>
+  <li>자동 업데이트는 버전 정보만 확인하며 개인정보를 전송하지 않습니다.</li>
+</ul>
+<div class="basis">근거: 「개인정보 보호법」 제29조</div>
+
+<h2 id="art-10">제10조 (개인정보 보호책임자)</h2>
+<table>
+  <tr><th>구분</th><th>성명</th><th>소속</th><th>직급</th><th>연락처</th></tr>
+  <tr><td>개인정보 보호책임자</td><td>김보성</td><td>명석고등학교</td><td>교사</td><td>khwarang2000@ms.hs.kr</td></tr>
+</table>
+<p>정보주체는 M-Desk 이용 중 발생한 개인정보 보호 관련 문의·불만처리·피해구제를 위 연락처로 요청할 수 있으며, 지체 없이 답변·처리합니다. <strong>별도 대표 전화번호는 운영하지 않으며, 이메일로 응대합니다.</strong></p>
+<p>기타 개인정보 침해에 대한 신고·상담은 아래 기관에 문의할 수 있습니다.</p>
+<ul>
+  <li>개인정보분쟁조정위원회: 1833-6972 (<a href="https://www.kopico.go.kr">kopico.go.kr</a>)</li>
+  <li>개인정보침해신고센터: 118 (<a href="https://privacy.kisa.or.kr">privacy.kisa.or.kr</a>)</li>
+  <li>대검찰청 사이버수사과: 1301 (<a href="https://www.spo.go.kr">spo.go.kr</a>)</li>
+  <li>경찰청 사이버수사국: 182 (<a href="https://ecrm.cyber.go.kr">ecrm.cyber.go.kr</a>)</li>
+</ul>
+<div class="basis">근거: 「개인정보 보호법」 제31조, 제30조제1항제6호</div>
+
+<h2 id="art-11">제11조 (변경 사항 고지)</h2>
+<p>본 처리방침은 시행일부터 적용되며, 내용의 추가·삭제·정정이 있는 경우 변경 사항의 시행 7일 전부터 본 페이지에 공지합니다. 정보주체의 권리에 중요한 변경이 있을 경우에는 30일 전에 공지합니다.</p>
+<div class="basis">근거: 「개인정보 보호법」 제30조제2항</div>
+
+<div class="contact">
+  <p><strong>부칙</strong>: 본 처리방침은 2026년 8월 10일부터 시행됩니다.</p>
+  <p><strong>문의처</strong>: khwarang2000@ms.hs.kr</p>
+</div>
+
+</div>
+</body>
+</html>
