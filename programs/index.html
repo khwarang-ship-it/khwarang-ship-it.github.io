@@ -182,6 +182,11 @@ details.prog[open] .chev { transform: rotate(180deg); }
   font-size: .9rem; line-height: 1.6; word-break: keep-all;
 }
 .note b { color: var(--fg); }
+.shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin: 22px 0 4px; }
+.shots figure { margin: 0; }
+.shots img { width: 100%; height: auto; display: block; border-radius: 10px; border: 1px solid var(--line); }
+.shots figcaption { margin-top: 6px; font-size: .8rem; color: var(--fg-muted); word-break: keep-all; }
+@media (max-width: 560px) { .shots { grid-template-columns: 1fr; } }
 .prog-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
 .prog-links a {
   font-size: .86rem; font-weight: 700; text-decoration: none; color: var(--accent-ink);
@@ -289,7 +294,24 @@ details.prog[open] .chev { transform: rotate(180deg); }
           테스트 기간이 짧아 자잘한 버그가 있을 수 있는데, 제보해 주시면 감사하겠습니다.
         </div>
 
-        <!-- 스크린샷 자리 — 파일 받으면 여기에 <figure class="shot"> 로 삽입 -->
+        <div class="shots">
+          <figure>
+            <img src="/programs/assets/shot-cards.png" alt="M-Desk 바탕화면 카드 배치 예시 — 시간표, 시계, 업무 도구, 할 일, 포스트잇 카드" loading="lazy">
+            <figcaption>바탕화면에 고정한 카드들 — 시간표, 시계, 업무 도구, 할 일, 포스트잇</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/shot-tray.png" alt="트레이 아이콘 메뉴 — 부팅 시 자동 실행 켜기" loading="lazy">
+            <figcaption>트레이 아이콘 메뉴에서 부팅 시 자동 실행 on/off</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/shot-selfstudy.png" alt="업무 도구의 자율학습 카드에서 담임모드로 자율학습 시스템 접속" loading="lazy">
+            <figcaption>업무 도구 → 자율학습 카드에서 담임모드 바로 접속</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/shot-roster.png" alt="명렬표 카드의 체크박스·메모 열과 포스트잇의 파일·이미지 삽입, 카드 우클릭 메뉴" loading="lazy">
+            <figcaption>명렬표 카드의 체크박스·메모 열, 포스트잇 파일·이미지 삽입, 카드 우클릭 메뉴</figcaption>
+          </figure>
+        </div>
 
         <div class="prog-links">
           <a href="/m-desk/privacy.html">개인정보 처리방침</a>
