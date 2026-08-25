@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>명석고 전용 프로그램 안내 — ms.hs.kr</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/assets/logo.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap">
+
+<style>
+/* ── tokens — 루트 index.html과 동일 (교표 팔레트) ── */
+:root {
+  --paper:      #f4f6f9;
+  --paper-2:    #ffffff;
+  --fg:         #12172a;
+  --fg-muted:   #58637a;
+  --accent:     #171c61;
+  --accent-ink: #0d1040;
+  --accent-soft:#e8e9f5;
+  --pop:        #d14e13;
+  --line:       #dfe2ea;
+  --card:       rgba(255, 255, 255, .72);
+  --card-brd:   rgba(23, 28, 97, .12);
+  --card-shadow: 0 1px 2px rgba(10,14,40,.05), 0 12px 32px -16px rgba(10,14,40,.22);
+  --ring:       var(--accent);
+  --btn-fg:     #ffffff;
+  --note-bg:    color-mix(in srgb, var(--pop) 8%, var(--paper-2));
+  --note-brd:   color-mix(in srgb, var(--pop) 30%, transparent);
+
+  --f-display: "Gowun Batang", "Apple SD Gothic Neo", serif;
+  --f-body: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --measure: 860px;
+  --r: 18px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:      #0a0e1c;
+    --paper-2:    #0e1326;
+    --fg:         #eef1f7;
+    --fg-muted:   #9aa5bd;
+    --accent:     #5cc2f0;
+    --accent-ink: #8bd7f7;
+    --accent-soft:rgba(92,194,240,.14);
+    --pop:        #ff8a57;
+    --line:       rgba(255,255,255,.10);
+    --card:       rgba(255,255,255,.045);
+    --card-brd:   rgba(255,255,255,.11);
+    --card-shadow: 0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.7);
+    --btn-fg:     #071019;
+  }
+}
+:root[data-theme="dark"] {
+  --paper:#0a0e1c; --paper-2:#0e1326; --fg:#eef1f7; --fg-muted:#9aa5bd;
+  --accent:#5cc2f0; --accent-ink:#8bd7f7; --accent-soft:rgba(92,194,240,.14);
+  --pop:#ff8a57; --line:rgba(255,255,255,.10);
+  --card:rgba(255,255,255,.045); --card-brd:rgba(255,255,255,.11);
+  --card-shadow:0 1px 2px rgba(0,0,0,.3), 0 16px 40px -20px rgba(0,0,0,.7);
+  --btn-fg:#071019;
+}
+:root[data-theme="light"] {
+  --paper:#f4f6f9; --paper-2:#ffffff; --fg:#12172a; --fg-muted:#58637a;
+  --accent:#171c61; --accent-ink:#0d1040; --accent-soft:#e8e9f5;
+  --pop:#d14e13; --line:#dfe2ea;
+  --card:rgba(255,255,255,.72); --card-brd:rgba(23,28,97,.12);
+  --card-shadow:0 1px 2px rgba(10,14,40,.05), 0 12px 32px -16px rgba(10,14,40,.22);
+  --btn-fg:#ffffff;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--fg);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { width: 100%; max-width: var(--measure); margin-inline: auto; padding-inline: 24px; }
+
+/* ── header / footer — 루트와 동일 ── */
+.site-head {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.site-head.stuck { border-bottom-color: var(--line); }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; padding-block: 14px; gap: 16px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.brand img { display: block; border-radius: 6px; }
+.brand-txt { display: flex; flex-direction: column; line-height: 1.25; }
+.brand-txt b { font-size: .95rem; font-weight: 700; }
+.brand-txt span { font-size: .76rem; color: var(--fg-muted); }
+.nav { display: flex; align-items: center; gap: 22px; font-size: .9rem; font-weight: 600; }
+.nav a { text-decoration: none; color: var(--fg-muted); transition: color .15s; }
+.nav a:hover { color: var(--fg); }
+.theme-btn {
+  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--paper-2); color: var(--fg);
+  cursor: pointer; flex: none;
+}
+.theme-btn .moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-btn .sun { display: none; }
+  :root:not([data-theme="light"]) .theme-btn .moon { display: block; }
+}
+:root[data-theme="dark"] .theme-btn .sun { display: none; }
+:root[data-theme="dark"] .theme-btn .moon { display: block; }
+:root[data-theme="light"] .theme-btn .sun { display: block; }
+:root[data-theme="light"] .theme-btn .moon { display: none; }
+
+.site-foot { border-top: 1px solid var(--line); margin-top: 64px; padding-block: 28px 40px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: .86rem; margin-bottom: 18px; }
+.foot-links a { text-decoration: none; color: var(--fg-muted); }
+.foot-links a:hover { color: var(--fg); text-decoration: underline; }
+.disclaim {
+  display: flex; gap: 10px; align-items: flex-start; margin: 0;
+  padding: 13px 16px; border-radius: 11px; border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--pop) 7%, transparent);
+  line-height: 1.65; word-break: keep-all; font-size: .86rem;
+}
+.disclaim svg { width: 16px; height: 16px; flex: none; color: var(--pop); margin-top: 3px; }
+.disclaim b { color: var(--fg); font-weight: 600; }
+
+/* ── hero ── */
+.hero { padding: 56px 0 12px; }
+.eyebrow { font-size: .82rem; font-weight: 700; letter-spacing: .04em; color: var(--accent-ink); margin: 0 0 10px; }
+h1 { font-family: var(--f-display); font-size: clamp(1.7rem, 3.2vw, 2.3rem); line-height: 1.35; margin: 0 0 14px; word-break: keep-all; }
+.lede { color: var(--fg-muted); margin: 0 0 22px; max-width: 56ch; word-break: keep-all; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  font-weight: 700; font-size: .92rem; padding: 10px 18px; border-radius: 999px;
+  border: 1px solid transparent; transition: transform .15s, opacity .15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn svg { width: 16px; height: 16px; }
+.btn-ghost { background: var(--paper-2); border-color: var(--line); color: var(--fg); }
+
+/* ── accordion ── */
+.programs { padding: 20px 0 40px; display: flex; flex-direction: column; gap: 14px; }
+details.prog {
+  background: var(--card); border: 1px solid var(--card-brd); border-radius: var(--r);
+  box-shadow: var(--card-shadow); overflow: hidden;
+}
+details.prog summary {
+  list-style: none; cursor: pointer; display: flex; align-items: center; gap: 14px;
+  padding: 18px 22px; font-weight: 700;
+}
+details.prog summary::-webkit-details-marker { display: none; }
+.prog-icon { width: 40px; height: 40px; border-radius: 10px; object-fit: cover; flex: none; background: var(--accent-soft); }
+.prog-icon.svg-icon { display: grid; place-items: center; color: var(--accent-ink); }
+.prog-icon.svg-icon svg { width: 22px; height: 22px; }
+.prog-title { flex: 1; min-width: 0; }
+.prog-title .name { font-size: 1.05rem; }
+.prog-title .tag { display: block; font-weight: 500; font-size: .86rem; color: var(--fg-muted); margin-top: 2px; }
+.chev { flex: none; width: 18px; height: 18px; color: var(--fg-muted); transition: transform .2s; }
+details.prog[open] .chev { transform: rotate(180deg); }
+.prog-body { padding: 0 22px 26px; border-top: 1px solid var(--line); }
+.prog-body h3 { font-size: 1rem; margin: 22px 0 10px; }
+.prog-body h3:first-child { margin-top: 20px; }
+.prog-body p, .prog-body li { color: var(--fg); }
+.prog-body ol, .prog-body ul { margin: 0; padding-left: 1.3em; }
+.prog-body ol li, .prog-body ul li { margin: 6px 0; word-break: keep-all; }
+.prog-body .placeholder { color: var(--fg-muted); font-size: .92rem; padding: 4px 0 6px; }
+.note {
+  margin-top: 20px; padding: 14px 16px; border-radius: 11px;
+  border: 1px solid var(--note-brd); background: var(--note-bg);
+  font-size: .9rem; line-height: 1.6; word-break: keep-all;
+}
+.note b { color: var(--fg); }
+.prog-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+.prog-links a {
+  font-size: .86rem; font-weight: 700; text-decoration: none; color: var(--accent-ink);
+  padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper-2);
+}
+.prog-links a:hover { text-decoration: underline; }
+
+/* ── reveal ── */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal.d1 { transition-delay: .1s; }
+
+@media (max-width: 560px) {
+  .nav a[data-optional] { display: none; }
+  .brand-txt span { display: none; }
+  details.prog summary { padding: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+<noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="i-ext"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></g>
+    <g id="i-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g>
+    <g id="i-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></g>
+    <g id="i-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></g>
+    <g id="i-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9"/></g>
+    <g id="i-chev"><path d="m6 9 6 6 6-6"/></g>
+    <g id="i-file-check"><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M4.5 22h11a2 2 0 0 0 2-2V7.5L13.5 2h-9a2 2 0 0 0-2 2v4"/><path d="m3 15 2 2 4-4"/></g>
+    <g id="i-store"><path d="M2 7h20"/><path d="M2 7a2 2 0 0 0 2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0 2-2"/><path d="M2 7 4 3h16l2 4"/><path d="M10 22v-6a2 2 0 0 1 4 0v6"/></g>
+    <g id="i-briefcase"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></g>
+  </defs>
+</svg>
+
+<header class="site-head" id="head">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/assets/logo-mark.png" alt="" width="34" height="34">
+      <span class="brand-txt">
+        <b>명석고등학교</b>
+        <span>ms.hs.kr</span>
+      </span>
+    </a>
+    <nav class="nav" aria-label="주요">
+      <a href="https://mshs.djsch.kr/">학교 홈페이지</a>
+      <a href="mailto:khwarang2000@ms.hs.kr" data-optional>문의</a>
+    </nav>
+    <button class="theme-btn" id="theme" type="button" aria-label="밝은/어두운 화면 전환">
+      <svg class="sun" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-sun"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-moon"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <p class="eyebrow reveal">ms.hs.kr / programs</p>
+    <h1 class="reveal d1">명석고 전용 프로그램 안내</h1>
+    <p class="lede reveal d1">명석고 선생님들을 위해 만든 프로그램들의 사용 안내를 모아둔 페이지입니다. 항목을 눌러 펼쳐보세요.</p>
+    <a class="btn btn-ghost reveal d1" href="mailto:khwarang2000@ms.hs.kr">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-mail"/></svg>
+      건의·버그 제보
+    </a>
+  </section>
+
+  <section class="programs wrap">
+
+    <details class="prog reveal" name="prog" open>
+      <summary>
+        <img class="prog-icon" src="/programs/assets/m-desk.png" alt="" width="40" height="40">
+        <span class="prog-title">
+          <span class="name">M-Desk</span>
+          <span class="tag">바탕화면을 대시보드처럼 — 카드형 위젯 프로그램</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+      </summary>
+      <div class="prog-body">
+        <p>선생님들의 바탕화면을 대시보드처럼 사용할 수 있게, 원하시는대로 카드를 배치해 고정시킬 수 있는 프로그램입니다.</p>
+
+        <h3>주요 기능</h3>
+        <ol>
+          <li><b>업무 도구</b> — 결석계를 작성해서 PDF 파일로 만들거나, 상벌점 입력 및 조회를 온라인 교무실과 연동해 바로 하실 수 있습니다.</li>
+          <li><b>부팅 시 자동 실행</b> — 작업표시줄 오른쪽 아래 트레이 아이콘에서 자동 실행 옵션을 켜고 끄실 수 있어, 컴퓨터가 켜질 때 카드들을 바로 띄우실 수 있습니다.</li>
+          <li><b>카드 선택과 고정</b> — 공통 설정에서 맘에 드는 카드들만 활성화하시고, 각 카드를 오른쪽 버튼으로 눌러 바탕화면 고정, 카드 설정을 하실 수 있습니다.</li>
+          <li><b>디자인 커스텀</b> — 원하시는 형태의 디자인으로 카드를 커스텀할 수 있게 준비해두었습니다.</li>
+        </ol>
+
+        <h3>최근 추가된 기능</h3>
+        <p class="placeholder">선생님들께서 주신 건의사항을 반영해 아래 기능을 추가했습니다. 프로그램이 다시 실행될 때 자동으로 업데이트됩니다.</p>
+        <ul class="whats-new">
+          <li><b>자율학습 시스템 연동</b> — 업무 도구 카드에서 담임 선생님은 자율학습 시스템 담임모드를 바로 쓰실 수 있고, 자습참여 현황 카드도 배치할 수 있습니다.</li>
+          <li><b>포스트잇 · 할 일 카드</b> — 설명 입력 칸에 파일 링크(편집 창으로 드래그) 와 이미지(<code>Ctrl+V</code>)를 넣으실 수 있습니다.</li>
+          <li><b>명렬표 카드</b> — 체크박스와 메모 열이 추가되었습니다.</li>
+          <li><b>액자 카드 (신규)</b> — 사진을 바탕화면에 카드 형식으로 고정하실 수 있습니다.</li>
+        </ul>
+
+        <div class="note">
+          이미 설치해서 쓰고 계시면 <b>프로그램을 다시 실행할 때 자동으로 업데이트</b>됩니다. 아직 설치 전이시면 안내 메일의 첨부파일로 설치해 주세요.
+          테스트 기간이 짧아 자잘한 버그가 있을 수 있는데, 제보해 주시면 감사하겠습니다.
+        </div>
+
+        <!-- 스크린샷 자리 — 파일 받으면 여기에 <figure class="shot"> 로 삽입 -->
+
+        <div class="prog-links">
+          <a href="/m-desk/privacy.html">개인정보 처리방침</a>
+          <a href="mailto:khwarang2000@ms.hs.kr">버그 제보하기</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="prog reveal" name="prog">
+      <summary>
+        <span class="prog-icon svg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-file-check"/></svg>
+        </span>
+        <span class="prog-title">
+          <span class="name">명석한 생기부</span>
+          <span class="tag">나이스 생기부 엑셀 점검 프로그램</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+      </summary>
+      <div class="prog-body">
+        <p class="placeholder">안내 준비 중입니다.</p>
+      </div>
+    </details>
+
+    <details class="prog reveal" name="prog">
+      <summary>
+        <span class="prog-icon svg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-store"/></svg>
+        </span>
+        <span class="prog-title">
+          <span class="name">선택과목 박람회</span>
+          <span class="tag">선택과목 온라인 전시관 및 학사 정보 시스템</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+      </summary>
+      <div class="prog-body">
+        <p class="placeholder">안내 준비 중입니다.</p>
+        <div class="prog-links">
+          <a href="https://ms.hs.kr/currifair/">바로가기 →</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="prog reveal" name="prog">
+      <summary>
+        <span class="prog-icon svg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-briefcase"/></svg>
+        </span>
+        <span class="prog-title">
+          <span class="name">온라인 교무실</span>
+          <span class="tag">결석계 · 상벌점 등 업무를 웹에서</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+      </summary>
+      <div class="prog-body">
+        <p class="placeholder">안내 준비 중입니다.</p>
+      </div>
+    </details>
+
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <nav class="foot-links" aria-label="바닥글">
+      <a href="/">ms.hs.kr 홈</a>
+      <a href="https://mshs.djsch.kr/">학교 공식 홈페이지</a>
+      <a href="mailto:khwarang2000@ms.hs.kr">khwarang2000@ms.hs.kr</a>
+    </nav>
+    <p class="disclaim">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-alert"/></svg>
+      <span><b>이 사이트는 명석고등학교 공식 홈페이지가 아닙니다.</b> 학교의 공식 안내는 <a href="https://mshs.djsch.kr/">mshs.djsch.kr</a>을 이용해 주세요.</span>
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  var saved = null;
+  try { saved = localStorage.getItem('theme'); } catch (e) {}
+  if (saved) root.setAttribute('data-theme', saved);
+  document.getElementById('theme').addEventListener('click', function () {
+    var dark = saved
+      ? saved === 'dark'
+      : matchMedia('(prefers-color-scheme: dark)').matches;
+    if (root.hasAttribute('data-theme')) dark = root.getAttribute('data-theme') === 'dark';
+    saved = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', saved);
+    try { localStorage.setItem('theme', saved); } catch (e) {}
+  });
+
+  var head = document.getElementById('head');
+  var onScroll = function () { head.classList.toggle('stuck', window.scrollY > 8); };
+  onScroll();
+  addEventListener('scroll', onScroll, { passive: true });
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+})();
+</script>
+</body>
+</html>
