@@ -224,6 +224,7 @@ details.prog[open] .chev { transform: rotate(180deg); }
     <g id="i-file-check"><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M4.5 22h11a2 2 0 0 0 2-2V7.5L13.5 2h-9a2 2 0 0 0-2 2v4"/><path d="m3 15 2 2 4-4"/></g>
     <g id="i-store"><path d="M2 7h20"/><path d="M2 7a2 2 0 0 0 2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0 2-2"/><path d="M2 7 4 3h16l2 4"/><path d="M10 22v-6a2 2 0 0 1 4 0v6"/></g>
     <g id="i-briefcase"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></g>
+    <g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></g>
   </defs>
 </svg>
 
@@ -311,32 +312,6 @@ details.prog[open] .chev { transform: rotate(180deg); }
           </figure>
         </div>
 
-        <h3>백신(V3) 실행 알림이 뜨는 경우</h3>
-        <p>AhnLab V3가 설치된 컴퓨터에서는 처음 실행할 때 <b>클라우드 평판 기반으로 파일 실행을 탐지했다는 알림</b>이 뜰 수 있습니다. 아직 널리 배포되지 않은 프로그램이라 나타나는 정상적인 안내이며, 아래처럼 처리하시면 됩니다.</p>
-        <ol>
-          <li>알림 창에서 파일 처리 방법을 <b>「실행 후 다음부터 묻지 않음」</b>으로 선택하고 확인을 누릅니다.</li>
-          <li>이후로도 계속 뜬다면, 작업표시줄 트레이의 <b>V3 아이콘을 마우스 오른쪽 버튼</b>으로 클릭 → <b>환경 설정</b>을 엽니다.</li>
-          <li>왼쪽 메뉴에서 <b>Active Defense → Active Defense 설정</b>을 선택합니다.</li>
-          <li>우측 화면에서 <b>ASD 네트워크 참여</b>와 <b>Active Defense 사용</b>을 모두 체크한 뒤 <b>적용 → 확인</b>을 누릅니다.</li>
-        </ol>
-        <div class="note">
-          이 설정을 켜 두면 M-Desk가 설치된 폴더(<code>C:\Mshs</code>)가 신뢰 목록으로 등록되어, 다음부터는 실행 알림이 뜨지 않습니다.
-        </div>
-        <div class="shots">
-          <figure>
-            <img src="/programs/assets/shot-v3-alert.png" alt="AhnLab V3 프로그램 실행 알림 — 실행 후 다음부터 묻지 않음 선택" loading="lazy">
-            <figcaption>실행 알림 — 「실행 후 다음부터 묻지 않음」 선택</figcaption>
-          </figure>
-          <figure>
-            <img src="/programs/assets/shot-v3-tray.png" alt="트레이의 V3 아이콘 우클릭 메뉴에서 환경 설정 선택" loading="lazy">
-            <figcaption>트레이 V3 아이콘 우클릭 → 환경 설정</figcaption>
-          </figure>
-          <figure>
-            <img src="/programs/assets/shot-v3-activedefense.png" alt="AhnLab V3 환경 설정의 Active Defense 화면 — ASD 네트워크 참여와 Active Defense 사용 체크" loading="lazy">
-            <figcaption>Active Defense 설정 — ASD 네트워크 참여 · Active Defense 사용 체크</figcaption>
-          </figure>
-        </div>
-
         <div class="prog-links">
           <a href="/m-desk/privacy.html">개인정보 처리방침</a>
           <a href="mailto:khwarang2000@ms.hs.kr">버그 제보하기</a>
@@ -392,6 +367,45 @@ details.prog[open] .chev { transform: rotate(180deg); }
       </summary>
       <div class="prog-body">
         <p class="placeholder">안내 준비 중입니다.</p>
+      </div>
+    </details>
+
+    <details class="prog reveal" name="prog">
+      <summary>
+        <span class="prog-icon svg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-shield"/></svg>
+        </span>
+        <span class="prog-title">
+          <span class="name">백신(V3) 실행 알림이 뜨는 경우</span>
+          <span class="tag">대부분의 프로그램에 공통되는 안내</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+      </summary>
+      <div class="prog-body">
+        <p>AhnLab V3가 설치된 컴퓨터에서는 위 프로그램들을 처음 실행할 때 <b>클라우드 평판 기반으로 파일 실행을 탐지했다는 알림</b>이 뜰 수 있습니다. 아직 널리 배포되지 않은 프로그램이라 나타나는 정상적인 안내이며, 아래처럼 처리하시면 됩니다.</p>
+        <ol>
+          <li>알림 창에서 파일 처리 방법을 <b>「실행 후 다음부터 묻지 않음」</b>으로 선택하고 확인을 누릅니다.</li>
+          <li>이후로도 계속 뜬다면, 작업표시줄 트레이의 <b>V3 아이콘을 마우스 오른쪽 버튼</b>으로 클릭 → <b>환경 설정</b>을 엽니다.</li>
+          <li>왼쪽 메뉴에서 <b>Active Defense → Active Defense 설정</b>을 선택합니다.</li>
+          <li>우측 화면에서 <b>ASD 네트워크 참여</b>와 <b>Active Defense 사용</b>을 모두 체크한 뒤 <b>적용 → 확인</b>을 누릅니다.</li>
+        </ol>
+        <div class="note">
+          이 설정을 켜 두면 해당 프로그램이 설치된 폴더가 신뢰 목록으로 등록되어, 다음부터는 실행 알림이 뜨지 않습니다.
+        </div>
+        <div class="shots">
+          <figure>
+            <img src="/programs/assets/shot-v3-alert.png" alt="AhnLab V3 프로그램 실행 알림 — 실행 후 다음부터 묻지 않음 선택" loading="lazy">
+            <figcaption>실행 알림 — 「실행 후 다음부터 묻지 않음」 선택</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/shot-v3-tray.png" alt="트레이의 V3 아이콘 우클릭 메뉴에서 환경 설정 선택" loading="lazy">
+            <figcaption>트레이 V3 아이콘 우클릭 → 환경 설정</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/shot-v3-activedefense.png" alt="AhnLab V3 환경 설정의 Active Defense 화면 — ASD 네트워크 참여와 Active Defense 사용 체크" loading="lazy">
+            <figcaption>Active Defense 설정 — ASD 네트워크 참여 · Active Defense 사용 체크</figcaption>
+          </figure>
+        </div>
       </div>
     </details>
 
