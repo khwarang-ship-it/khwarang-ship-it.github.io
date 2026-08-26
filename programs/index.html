@@ -311,6 +311,32 @@ details.prog[open] .chev { transform: rotate(180deg); }
           </figure>
         </div>
 
+        <h3>백신(V3) 실행 알림이 뜨는 경우</h3>
+        <p>AhnLab V3가 설치된 컴퓨터에서는 처음 실행할 때 <b>클라우드 평판 기반으로 파일 실행을 탐지했다는 알림</b>이 뜰 수 있습니다. 아직 널리 배포되지 않은 프로그램이라 나타나는 정상적인 안내이며, 아래처럼 처리하시면 됩니다.</p>
+        <ol>
+          <li>알림 창에서 파일 처리 방법을 <b>「실행 후 다음부터 묻지 않음」</b>으로 선택하고 확인을 누릅니다.</li>
+          <li>이후로도 계속 뜬다면, 작업표시줄 트레이의 <b>V3 아이콘을 마우스 오른쪽 버튼</b>으로 클릭 → <b>환경 설정</b>을 엽니다.</li>
+          <li>왼쪽 메뉴에서 <b>Active Defense → Active Defense 설정</b>을 선택합니다.</li>
+          <li>우측 화면에서 <b>ASD 네트워크 참여</b>와 <b>Active Defense 사용</b>을 모두 체크한 뒤 <b>적용 → 확인</b>을 누릅니다.</li>
+        </ol>
+        <div class="note">
+          이 설정을 켜 두면 M-Desk가 설치된 폴더(<code>C:\Mshs</code>)가 신뢰 목록으로 등록되어, 다음부터는 실행 알림이 뜨지 않습니다.
+        </div>
+        <div class="shots">
+          <figure>
+            <img src="/programs/assets/shot-v3-alert.png" alt="AhnLab V3 프로그램 실행 알림 — 실행 후 다음부터 묻지 않음 선택" loading="lazy">
+            <figcaption>실행 알림 — 「실행 후 다음부터 묻지 않음」 선택</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/shot-v3-tray.png" alt="트레이의 V3 아이콘 우클릭 메뉴에서 환경 설정 선택" loading="lazy">
+            <figcaption>트레이 V3 아이콘 우클릭 → 환경 설정</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/shot-v3-activedefense.png" alt="AhnLab V3 환경 설정의 Active Defense 화면 — ASD 네트워크 참여와 Active Defense 사용 체크" loading="lazy">
+            <figcaption>Active Defense 설정 — ASD 네트워크 참여 · Active Defense 사용 체크</figcaption>
+          </figure>
+        </div>
+
         <div class="prog-links">
           <a href="/m-desk/privacy.html">개인정보 처리방침</a>
           <a href="mailto:khwarang2000@ms.hs.kr">버그 제보하기</a>
