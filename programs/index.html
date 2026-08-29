@@ -167,6 +167,9 @@ details.prog summary::-webkit-details-marker { display: none; }
 .prog-title { flex: 1; min-width: 0; }
 .prog-title .name { font-size: 1.05rem; }
 .prog-title .tag { display: block; font-weight: 500; font-size: .86rem; color: var(--fg-muted); margin-top: 2px; }
+.prog-ext { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; color: var(--fg-muted); }
+.prog-ext:hover { background: var(--accent-soft); color: var(--accent-ink); }
+.prog-ext svg { width: 18px; height: 18px; }
 .chev { flex: none; width: 18px; height: 18px; color: var(--fg-muted); transition: transform .2s; }
 details.prog[open] .chev { transform: rotate(180deg); }
 .prog-body { padding: 0 22px 26px; border-top: 1px solid var(--line); }
@@ -271,16 +274,13 @@ details.prog[open] .chev { transform: rotate(180deg); }
           <span class="name">온라인 교무실</span>
           <span class="tag">결석계 · 상벌점 등 업무를 웹에서</span>
         </span>
+        <a class="prog-ext" href="https://docs.google.com/presentation/d/1adzlxxqgvoVpZXmQ4nGz26mLpS2SacH8i-xYtu5g8_U/edit" target="_blank" rel="noopener" title="발표 자료 보기" aria-label="발표 자료 보기" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ext"/></svg>
+        </a>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
       </summary>
       <div class="prog-body">
         <p>담임 선생님의 학생 관리·업무 부담을 줄이기 위해 만든 교내 온라인 교무실입니다.</p>
-
-        <div class="prog-links">
-          <a href="https://docs.google.com/presentation/d/1adzlxxqgvoVpZXmQ4nGz26mLpS2SacH8i-xYtu5g8_U/edit" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:-2px;margin-right:4px"><use href="#i-ext"/></svg>발표 자료 보기
-          </a>
-        </div>
 
         <h3>접속 방법</h3>
         <p><code>@dje.go.kr</code> 교육용 계정으로 로그인해야 사용할 수 있습니다. 그 계정으로 크롬에 로그인하면 왼쪽 상단에 자동으로 생성되는 북마크에서 <b>「명석고 온라인 교무실」</b> 링크로 들어가실 수 있습니다.</p>
@@ -465,16 +465,13 @@ details.prog[open] .chev { transform: rotate(180deg); }
           <span class="name">명석나우</span>
           <span class="tag">시간표를 홈 화면 위젯 · 워치에서 — Android 전용</span>
         </span>
+        <a class="prog-ext" href="https://docs.google.com/presentation/d/1k-67pKq27XnJVycdvd6dB8l4lxyShqCns48bsSM3aOA/edit" target="_blank" rel="noopener" title="발표 자료 보기" aria-label="발표 자료 보기" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ext"/></svg>
+        </a>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
       </summary>
       <div class="prog-body">
         <p>시간표를 확인하려고 앱을 여는 대신, 핸드폰 홈 화면 위젯과 손목의 워치에서 바로 볼 수 있게 만든 동반 앱입니다. <b>Android, Wear OS 6 이상</b>에서만 쓰실 수 있습니다(iOS는 지원하지 않습니다).</p>
-
-        <div class="prog-links">
-          <a href="https://docs.google.com/presentation/d/1k-67pKq27XnJVycdvd6dB8l4lxyShqCns48bsSM3aOA/edit" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:-2px;margin-right:4px"><use href="#i-ext"/></svg>발표 자료 보기
-          </a>
-        </div>
 
         <h3>기능</h3>
         <ul>
