@@ -224,7 +224,9 @@ details.prog[open] .chev { transform: rotate(180deg); }
     <g id="i-file-check"><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M4.5 22h11a2 2 0 0 0 2-2V7.5L13.5 2h-9a2 2 0 0 0-2 2v4"/><path d="m3 15 2 2 4-4"/></g>
     <g id="i-store"><path d="M2 7h20"/><path d="M2 7a2 2 0 0 0 2 2v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9a2 2 0 0 0 2-2"/><path d="M2 7 4 3h16l2 4"/><path d="M10 22v-6a2 2 0 0 1 4 0v6"/></g>
     <g id="i-briefcase"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></g>
-    <g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></g>  </defs>
+    <g id="i-shield"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></g>
+    <g id="i-watch"><circle cx="12" cy="12" r="6"/><polyline points="12 10 12 12 13 13"/><path d="m16.13 7.66-.81-4.05a2 2 0 0 0-2-1.61h-2.68a2 2 0 0 0-2 1.61l-.78 4.05"/><path d="m7.87 16.34.81 4.05a2 2 0 0 0 2 1.61h2.68a2 2 0 0 0 2-1.61l.78-4.05"/></g>
+  </defs>
 </svg>
 
 <header class="site-head" id="head">
@@ -446,6 +448,66 @@ details.prog[open] .chev { transform: rotate(180deg); }
 
         <div class="note">
           오류나 개선하면 좋을 점이 있으시면 언제든 알려주세요.
+        </div>
+
+        <div class="prog-links">
+          <a href="mailto:khwarang2000@ms.hs.kr">버그 제보하기</a>
+        </div>
+      </div>
+    </details>
+
+    <details class="prog reveal" name="prog">
+      <summary>
+        <span class="prog-icon svg-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-watch"/></svg>
+        </span>
+        <span class="prog-title">
+          <span class="name">명석나우</span>
+          <span class="tag">시간표를 홈 화면 위젯 · 워치에서 — Android 전용</span>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
+      </summary>
+      <div class="prog-body">
+        <p>시간표를 확인하려고 앱을 여는 대신, 핸드폰 홈 화면 위젯과 손목의 워치에서 바로 볼 수 있게 만든 동반 앱입니다. <b>Android, Wear OS 6 이상</b>에서만 쓰실 수 있습니다(iOS는 지원하지 않습니다).</p>
+
+        <div class="prog-links">
+          <a href="https://docs.google.com/presentation/d/1k-67pKq27XnJVycdvd6dB8l4lxyShqCns48bsSM3aOA/edit" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:1em;height:1em;vertical-align:-2px;margin-right:4px"><use href="#i-ext"/></svg>발표 자료 보기
+          </a>
+        </div>
+
+        <h3>기능</h3>
+        <ul>
+          <li><b>핸드폰 위젯</b> — 홈 화면에 위젯을 놓아두면 오늘 시간표를 바로 확인할 수 있습니다.</li>
+          <li><b>워치 타일</b> — 손목에서 스와이프 한 번으로 오늘 전체 시간표를 한눈에 볼 수 있습니다.</li>
+          <li><b>워치 시계 화면</b>(선택) — 시간표 카드형·교포 로고형·인포 대시보드형 3종류, 각각 화이트/다크 등 테마로 제공됩니다. 시간표 외에도 날씨·미세먼지·걸음수·배터리 등 정보 카드를 원하는 대로 조합할 수 있습니다.</li>
+        </ul>
+        <div class="shots">
+          <figure>
+            <img src="/programs/assets/mshsnow-widget.png" alt="명석나우 핸드폰 홈 화면 위젯 — 이번 주 시간표" loading="lazy">
+            <figcaption>핸드폰 홈 화면 위젯</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/mshsnow-tile.png" alt="명석나우 워치 타일 — 오늘 전체 시간표" loading="lazy">
+            <figcaption>워치 타일 — 오늘 시간표</figcaption>
+          </figure>
+          <figure>
+            <img src="/programs/assets/mshsnow-watchface.png" alt="명석나우 워치 시계 화면 — 인포 대시보드형" loading="lazy">
+            <figcaption>워치 시계 화면 — 인포 대시보드형</figcaption>
+          </figure>
+        </div>
+
+        <h3>설치 방법</h3>
+        <ul>
+          <li><code>dje.go.kr</code> 계정으로 플레이스토어에서 <b>「명석나우」</b> 또는 <b>「명석」</b>으로 검색해서 설치하시거나, <code>dje.go.kr</code> 계정으로 로그인된 크롬에서 아래 링크로 접속해 <b>Tester 참여 → Install</b>로 설치하실 수 있습니다.</li>
+          <li>워치 시계 화면까지 쓰고 싶으신 선생님은 <b>직접 설치</b>해 드려야 합니다. 기능이 있는 워치 시계 화면은 플레이스토어 정책상 스토어 업로드가 되지 않습니다.</li>
+        </ul>
+        <div class="prog-links">
+          <a href="https://play.google.com/store/apps/details?id=kr.mshs.now&hl=en-US">Tester 참여하기 →</a>
+        </div>
+
+        <div class="note">
+          선생님들 성함이 화면에 바로 뜨는 앱이라, 현재는 <b>비공개 테스트</b> 방식으로 배포하고 있습니다. 오류나 개선하면 좋을 점이 있으시면 언제든 알려주세요.
         </div>
 
         <div class="prog-links">
