@@ -179,6 +179,7 @@ details.prog summary::-webkit-details-marker { display: none; }
 .prog-ext svg { width: 18px; height: 18px; }
 .chev { flex: none; width: 18px; height: 18px; color: var(--fg-muted); transition: transform .2s; }
 details.prog[open] .chev { transform: rotate(180deg); }
+details.prog { scroll-margin-top: 76px; }
 .prog-body { padding: 0 22px 26px; border-top: 1px solid var(--line); }
 .prog-body h3 { font-size: 1rem; margin: 22px 0 10px; }
 .prog-body h3:first-child { margin-top: 20px; }
@@ -613,6 +614,9 @@ details.prog[open] .chev { transform: rotate(180deg); }
           <span class="name">M-Desk</span>
           <span class="tag">바탕화면을 대시보드처럼 — 카드형 위젯 프로그램</span>
         </span>
+        <a class="prog-ext" href="https://docs.google.com/presentation/d/15rmt6xJfuJKESl-s7K_EizeJ27POP0stlhykNGbD3PY/edit?usp=sharing" target="_blank" rel="noopener" title="설명서" aria-label="설명서" onclick="event.stopPropagation()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-ext"/></svg>
+        </a>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><use href="#i-chev"/></svg>
       </summary>
       <div class="prog-body">
@@ -866,6 +870,14 @@ details.prog[open] .chev { transform: rotate(180deg); }
     });
   }, { threshold: 0, rootMargin: '0px 0px -40px' });
   document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+  document.querySelectorAll('details.prog').forEach(function (d) {
+    d.addEventListener('toggle', function () {
+      if (d.open) requestAnimationFrame(function () {
+        d.scrollIntoView({ block: 'start' });
+      });
+    });
+  });
 })();
 </script>
 </body>
